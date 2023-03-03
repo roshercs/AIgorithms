@@ -1,0 +1,138 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static '/styles/logistica.css' %}"/>
+    <div id="main-container">
+        <h1 id="titulo">Clasificación Logística: </h1>
+        <p class="textoCont">
+            Las regresiones son funciones matemáticas que permiten inferir un modelos dada una colección de datos. En otras palabras, la función nos permitirá estimar o aproximar los datos dados, tanto los existentes como los nuevos. Esta característica es ideal para el aprendizaje automático, pues nuestro modelo se adecuará a los datos (aprende de ellos).
+        </p>
+        <p class="subtitSec"><b>Aprendizaje automático</b></p>
+        <p class="textoCont">
+            Aprender consiste en adquirir conocimientos (comprensión) mediante el análisis o la experiencia. Las personas aprendemos diariamente en base de lo que vivimos, lo que nos rodea, y los datos existentes de la situación. Nos adecuamos a lo que tenemos y actuamos en correspondencia a ello.
+            <br>
+        </p>
+        <p class="textoCont">
+            El aprendizaje automático consiste en aprender automáticamente a partir de los datos, a través de un proceso de inferencia, modelo o aprendizaje de ejemplos (reconocimiento de objetos o personas). La extracción automática de información es útil mediante la construcción de buenos modelos inferenciales.
+            Con base a estos modelos inferenciales podemos realizar el <b>pronóstico</b> y la  <b>clasificación</b>.
+            <br><br>
+            <b>Pronóstico:</b> Modela funciones de valor continuo, es decir, predice valores numéricos desconocidos.
+            <b>Clasificación:</b> Predice etiquetas de una o más clases de tipo discretas (0, 1, 2) o nominales (A, B, C; o
+            positivo, negativo; y otros).
+            <br><br>
+            En ambos casos, pronóstico y clasificación, si la precisión es aceptable, se utiliza el modelo para pronosticar o clasificar nuevos datos, cuyos valores o etiquetas no se conocen. Existen así pues, diferentes algoritmos para esto:
+        </p>
+        <ul>
+            <li class="listado">Regresión (lineal o logística)</li>
+            <li class="listado">Nearest Neighbor (kNN)</li>
+            <li class="listado">Arboles de Decisión</li>
+            <li class="listado">Máquina de soporte de vectores</li>
+            <li class="listado">Redes Neuronales Artificiales</li>
+            <li class="listado">Métodos Bayesianos</li>
+            <li class="listado">Entre otros</li>
+        </ul>
+        <p class="subtitSec"><b>Regresión lineal</b></p>
+        <p class="textoCont">
+            La regresión lineal es una forma básica de aprendizaje supervisado, cuyo objetivo es calcular una ecuación que minimiza la distancia entre la línea ajustada (recta) y todos los puntos de datos. La regresión según el número de variables son: si se tiene dos variables se trata de un problema de <b>regresión lineal simple</b>; si se tiene más de dos variables se trata de un problema de <b>regresión lineal múltiple</b>
+            <br>
+            Para este algoritmo, se traza una recta (línea) que modele mejor los puntos. A esto se conoce como la recta de mejor ajuste.
+            <br>
+            En la <b>regresión lineal simple</b> se evalúa una sola variable independiente (X), cuya ecuación lineal es:
+        </p>
+        <p class="ecuacion">Y=a+bX+u</p>
+        <p class="textoCont">Donde X es la variable independiente con la que se estima Y, a es el intercepto (corta el eje Y), y b es la pendiente de la recta. Siendo que:</p>
+        
+        <div class="grafica">
+            <img src="{% static 'ab.png' %}" width=auto>
+        </div>
+        <p class="textoCont">
+            Donde S<sub>x</sub> y S<sub>xy</sub> son la desviación estandar de x y la varianza de XY. Por su parte, u es el residuo es la diferencia entre le punto pronosticado y la observación real. El residuo se calcula a partir de la summa del error cuadrático medio (SSE), y se obtiene de la siguiente forma:
+        </p>
+        <div class="grafica">
+            <img src="{% static 'residuo2.png' %}" width=auto>
+        </div>
+        <div class="grafica3">
+            <img src="{% static 'residuo.png' %}" width=auto>
+        </div>
+        <p class="textoCont">
+            La <b>regresión lineal múltiple</b> es similar a la simple. Sin embargo, se evalúa más de una variable independiente. Así pues, para cada una se evalúa una pendiente propia respecto a Y.
+        </p>
+        <h2 class="subtitSec">Regresión Logística</h2>
+        <p class="textoCont">
+            La regresión logística es otro tipo de algoritmo de aprendizaje supervisado cuyo objetivo es predecir valores binarios (0 o 1). Este algoritmo consiste en una transformación a la regresión lineal. La transformación se debe a que una regresión lineal no funciona para predecir una variable binaria. La forma de el aprendizaje automático requiere tener una muestra para entrenar el modelo y otro para validarlo (no la misma).
+            <br>
+            Para este algoritmo se utiliza la misma estructura que la regresión lineal, pero se transforma la variable respuesta (0 o 1) en una probabilidad. Para esta transformación se utiliza la función logística (conocida también como sigmoide).
+        </p>
+        <div class="grafica2">
+            <img src="{% static 'funcionlogistica.png' %}" width=auto>
+        </div>
+        <h2 class="subtitSec">Procedimiento</h2>
+        <p class="textoCont">
+            El procedimiento para este algoritmo no es tan complicado. Tenemos más un procedimiento matemático que un idea compleja de Inteligencia Artificial. En pocas palabras el procedimiento es el siguiente:
+            <br>
+        </p>
+        <ol class="listado">
+            <li><b>Paso 1:</b>Se establece transformar Y en una probabilidad &Ycirc; a partir de una función. </li>
+            <p class="ecuacion">Y=a+ b<sub>i</sub>X<sub>i</sub>+u  -></p>
+            <div class="grafica2">
+                <img src="{% static 'logisticaFunc.png' %}" width=400px>
+            </div>
+            <p class="textoCont">A esta transformación también se conoce como razón de probabilidad de ser verdadero (Odds Ratio).</p> 
+            <li><b>Paso 2:</b> Se calcula la regresión lineal para predecir la probabilidad: a+b<sub>i</sub>X<sub>i</sub><br>
+            En otras palabras, se calcula el modelo de regresión lineal primeramente. Los resultados de este, se utilizarán en la regresión logística.</li>
+            <li><b>Paso 3:</b> Se transforma el resultado de la regresión lineal en una probabilidad. Esto es:</li>
+            <div class="grafica2">
+                <img src="{% static 'logisticaFunc.png' %}" width=400px>
+            </div>
+            <p class="textoCont">Si la probabilidad es mayor a 0.5 se asigna 1. Si es menor o igual a 0.5, se asigna 0. Esta clasificación aumenta la probabilidad de asignar correctamente a los elementos en una clasificación binaria.</p>
+        </ol>
+        <h2 class="subtitSec">Validación de la clasificación</h2>
+        <p class="textoCont">
+            Para la validación del modelo se utiliza la <b>matriz de clasificación</b>. En la variable clase (la variable a clasificar u obtener) el conjunto de entrenamiento toma dos valores posibles: 0 o 1; positivo o negativo; falso o verdadero. Los valores positivos y negativos que se predicen correctamente se conocen como <b>verdaderos positivos (VP)</b> y <b>verdaderos negativos (VN)</b>, respectivamente. Mientras que los valores clasificados se denominan <b>falsos positivos (FP)</b> y <b>falsos negativos (FN)</b>.
+        </p>
+        <div class="grafica">
+            <img src="{% static 'matrizClasificacion.png' %}" width=400px>
+        </div>
+        <p class="textoCont">
+            <b>Criterio de división: </b>Para este método de evaluación del modelo se necesita dividir los datos en <b>Datos de entrenamiento (training)</b> y de los <b>Datos de Prueba(test)</b>.
+            El procedimiento es el siguiente: una vez generado el modelo (a partir de los datos de entrenamiento), se evalúa el modelo con los datos de entrenamiento. Se evalúan todos los elementos y se determina si la predicción (clase) coincide con los valores reales (Y). Se cuentan todos los elementos y se muestran los totales obtenidos en la matriz.
+            <br>
+            Con la matriz generada (ilustrada en la figura de arriba) podemos obtener los siguientes factores:
+        </p>
+        <ol class="listado">
+            <li><b>Exactitud (Acurracy):</b> Es el porcentaje de datos clasificados correctamente.</li>
+            <div class="grafica2">
+                <img src="{% static 'exactitud.png' %}" width=400px>
+            </div>
+            <li><b>Precisión:</b> Es el porcentaje de clasificación positiva.</li>
+            <div class="grafica2">
+                <img src="{% static 'logisticaFunc.png' %}" width=400px>
+            </div>
+            <li><b>Tasa de error (Misclassification Rate):</b> Porcentaje de datos clasificados incorrectamente.</li>
+            <div class="grafica2">
+                <img src="{% static 'tazaerror.png' %}" width=400px>
+            </div>
+            <li><b>Sensibilidad (True Positive Rate):</b> Es el porcentaje de clasificación del total positivos.</li>
+            <div class="grafica2">
+                <img src="{% static 'sensibilidaad.png' %}" width=400px>
+            </div>
+            <li><b>Especificidad (True Negative Rate): </b>Es el porcentaje de clasificación del total negativos.</li>
+            <div class="grafica2">
+                <img src="{% static 'especificidad.png' %}" width=400px>
+            </div>
+        </ol>
+        <p class="textoCont">Estos valores nos permiten evaluar al modelo generado. De acuerdo a estos es que estimamos la fiabilidad del modelo y su utilidad real.</p>
+        <div class="grafica2">
+            <img src="{% static 'exactitud2.png' %}" width=500px>
+        </div>
+        <p class="textoCont">
+            Así pues, esta matriz puede utilizarse de forma más específica para evaluar el modelo. La <b>curba ROC</b> por ejemplo.El concepto de ROC y AUC se basa en el conocimiento de la matriz de confusión, sensibilidad y especificidad. Este concepto puede aplicarse a cualquier algoritmo de clasificación. La curva ROC es una medida de rendimiento para problemas de clasificación. ROC (características operativas del receptor) es una curva de probabilidad y AUC (área bajo la curva) representa el grado de separabilidad. Cuanto mayor sea el AUC, mejor será el modelo para clasificar (distinguir) entre nuevos elementos. La curva ROC se genera trazando la tasa de los verdaderos positivos -TPR- (eje y) contra la tasa de los falsos positivos -FPR- (eje x).
+        </p>
+        <div class="grafica">
+            <img src="{% static 'roc.png' %}" width=300px>
+        </div>
+        <div id="boton_Link">
+            <a href="/regresion_simulate.html"><button type="button" class="botonLink">Empezar</button></a>
+        </div>
+    </div>
+{% endblock %}

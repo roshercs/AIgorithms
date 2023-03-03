@@ -1,0 +1,97 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static '/styles/metricas.css' %}"/>
+    <div id="main-container">
+        <h1 class="titSec">Metricas de Distancia: </h1>
+        <p class="textoCont">
+            Las métricas de distancia no son por sí mismas un algoritmo de aprendizaje. Sin embargo, son utilizadas para otros algoritmos como el clustering para operar. Como su nombre lo indica, definen la distancia entre elementos. De forma gráfica podemos pensar en dos puntos en un plano cartesiano a los cuales obtenemos la distancia que los separa. 
+            <br><br>
+            Una medida de distancia es una puntuación objetiva que resume la diferencia entre dos elementos (objetos). Estas mediciones se utilizan para ‘aprender de los datos’. Como se puede entender, se trata de un algoritmo de aprendizaje <b>No supervisado</b>.
+            <br><br>
+            Existen diferentes modos de aproximar dicha distancia, algunas de ellas son las siguientes:
+        </p>
+        <ol class="Listado">
+            <li>Distancia Euclidiana (Euclídea)</li>
+            <li>Distancia de Chebyshev.</li>
+            <li>Distancia de Manhattan (Geometría del taxista).</li>
+            <li>Distancia de Minkowsky.</li>
+        </ol>
+        <p class="textoCont">
+            Saber qué medida de distancia utilizar es útil para obtener modelos más precisos. Ahora bien, no existe una medida de distancia que sea mejor que el resto de forma absoluta. Cuál de estas opciones es mejor dependerá directamente del caso de estudio bajo el análisis.
+        </p>
+        <h2 class="subtitSec">Medidas de distancia</h2>
+        <p class="textoCont">Matemáticamente, una distancia es una función, d(a,b), que asigna un valor positivo a cada
+            par de objetos (puntos) de un espacio n-dimensional. Esta tiene las siguientes propiedades:
+        </p>
+        <ol class="Listado">
+            <li><b>No negativa</b>: el valor puede ser mayor o igual a cero (d(a,b)>=0)</li>
+            <li><b>Simétrica</b>: la distancia entre a y b es la misma que entre b y a (d(a,b)=d(b,a))</li>
+            <li>La distancia de dos objetos en un mismo punto es cero (d(a,a)=0)</li>
+        </ol>
+        
+
+        <h2 class="subtitSec">Distancia Euclideana</h2>
+        <p class="textoCont">
+            Distancia Euclidiana (euclídea, por Euclides) es una de las métricas más utilizadas para calcular la distancia entre dos puntos, conocida también como espacio euclidiano.Sus bases se encuentran en la aplicación del Teorema de Pitágoras, donde la distancia viene a ser la longitud de la hipotenusa.
+        </p>
+        <div id="grafica">
+            <img src="{% static 'euclideana.png' %}" width="350px">
+        </div>
+        <p class="textoCont">Ahora bien, en los algoritmos de aprendizaje, no siempre se trabajan con transacciones de 2 variables (x,y), sino que podemos tener n dimensiones (n variables). Para esta generalidad tenemos la siguiente fórmula: </p>
+        <div id="grafica2">
+            <img src="{% static 'dimensiones.png' %}" width=auto>
+        </div>
+
+        <h2 class="subtitSec">Distancia de Chebyshev</h2>
+        <p class="textoCont">
+            Lleva el nombre del matemático ruso Pafnuty Chebyshev, conocido por su trabajo en la geometría analítica y teoría de números. La distancia de Chebyshev es el valor máximo absoluto de las diferencias entre las coordenadas de un par de elementos.
+        </p>
+        <div id="grafica3">
+            <img src="{% static 'chebyshev.png' %}" width="550px">
+        </div>
+
+        <h2 class="subtitSec">Distancia de Manhattan</h2>
+        <p class="textoCont">
+            La distancia euclidiana es una buena métrica. Sin embargo, en la vida real, por ejemplo en una ciudad, es imposible moverse de un punto a otro de manera recta. Se utiliza la distancia de Manhattan si se necesita calcular la distancia entre dos puntos en una ruta similar a una cuadrícula (información geoespacial). Se llama Manhattan debido al diseño de cuadrícula de la mayoría de las calles dela isla de Manhattan, Nueva York (USA). También se conoce como geometría del taxi, distancia de la manzana de la ciudad, y distancia rectilínea.
+        </p>
+        <div id="grafica">
+            <img src="{% static 'manhatan.png' %}" width="400px">
+        </div>
+
+        <h2 class="subtitSec">Distancia de Minkowski</h2>
+        <p class="textoCont">
+            La distancia de Minkowski es una distancia entre dos puntos en un espacio n-dimensional. Es una métrica de distancia generalizada, lo que quiere decir que a partir de esta se pueden obtener las anteriores (Euclidiana, Manhattan y Chebyshev).
+        </p>
+        <div id="grafica">
+            <img src="{% static 'mintowski.png' %}" width="400px">
+        </div>
+        <p class="textoCont">
+            donde λ es el orden para calcular la distancia de tres formas diferentes:
+        </p>
+        <ul class="Listado">
+            <li>λ = 1, distancia de Manhattan (métrica L<sup>1</sup>)</li>
+            <li>λ = 2, distancia Euclidiana (métrica L<sup>2</sup>)</li>
+            <li>λ = 3, distancia de Chebyshev (métrica L)</li>
+        </ul>
+        <p class="textoCont">
+            Al sustituir estos valores de lambda en la ecuación, solo se requieren de un poco de desarrollo matemático para encontrarnos precisamente con las medidas antes mencionadas. En la actualidad se usan valores intermedios, por ejemplo, λ = 1.5, que proporciona un equilibrio entre las medidas. De forma simple, equivaldría a una medida híbrida entre dos diferentes.
+        </p>
+
+        <h2 class="subtitSec">Consideraciones finales</h2>
+        <p class="textoCont">
+            Una buena métrica de distancia ayuda a mejorar significativamente el rendimiento del proceso de clasificación, clusterización, recuperación de información y otras aplicaciones. La función utilizada para medir distancias depende de la situación en la que esté trabajando. Por ejemplo, en algunas áreas, la distancia euclidiana puede ser óptima y útil para calcular distancias. Hay aplicaciones que requieren de un enfoque refinado para calcular distancias entre
+            puntos, como la distancia Minkowski.
+        </p>
+
+        <div id="boton_Link">
+            <a href="/metricas_simulate.html"><button type="button" class="botonLink">Empezar</button></a>
+        </div>
+    </div>
+    <footer>
+        <section>
+            <p>Contacto: <a href="mailto: rogerlibra01@gmail.com">Mail</a></p>
+        </section>
+        <p>Copyright 2022 by Rogelio Hernandez</p>
+    </footer>
+{% endblock %}

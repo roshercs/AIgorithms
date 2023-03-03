@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Merriweather&display=swap" rel="stylesheet">
+        <title>Apriori</title>
+        <link rel="stylesheet" href="{% static '/styles/form__style.css' %}"/>
+        <link rel="icon" type="image/png" href="{% static 'logoShort.png' %}"
+    </head>
+    <body>
+        <form action="" class="form-register" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h1 class="form__tittle">Paso 1: Ingrese los valores </h1>
+            <div class="container--flex">
+                <fieldset id="cuadro">
+                    <legend>Por favor, indique el tipo de medición a obtener:</legend>
+                    <div>
+                        <input type="radio" id="opc1" name="medicion" value="euclidean" required/>
+                        <label for="opc1">Distancia Euclideana(euclidean)</label><br>  
+                        <input type="radio" id="opc2" name="medicion" value="chebyshev" required/>
+                        <label for="opc2">Distancia de Chebyshev</label><br>
+                        <input type="radio" id="opc3" name="medicion" value="cityblock" required/>
+                        <label for="opc3">Distancia de Manhattan (cityblock)</label><br>
+                        <br>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="container--flex">
+                <fieldset id="cuadro">
+                    <legend>Respecto a la colección de datos, indique el tipo de procesamiento:</legend>
+                    <br>
+                    <div>
+                        <input type="radio" id="stand" name="datosProc" value="estandarizados" required/>
+                        <label for="stand"> Datos Estandarizados</label><br>
+                        <input type="radio" id="norm" name="datosProc" value="normalizados" required/>
+                        <label for="norm"> Datos Normalizados</label><br>
+                    </div>
+                </fieldset>
+            </div> 
+            <div class="container--flex">
+                <fieldset id="cuadro">
+                    <legend>Respecto a la colección de datos, indique el tipo de procesamiento:</legend>
+                    <br>
+                    <div>
+                        <input type="radio" id="jerar" name="clustering" value="jerarquico" required/>
+                        <label for="jerar"> Clustering Jerarquico</label><br>
+                        <input type="radio" id="part" name="clustering" value="particional" required/>
+                        <label for="part"> Clustering Particional</label><br>
+                    </div>
+                </fieldset>
+            </div>
+
+
+            <input type="file" name="file_name" class="form__file" required>
+            <input type="submit" class="form__submit">
+            <div class="notas">
+                <p> <b>NOTA: </b> El archivo a seleccionar es de extención '.csv' para operar. Así mismo, para este algoritmo, se requiere el uso de una colección de datos <b><ins>CON CABECERA</ins></b>. Cada fila cuenta con valores para cada una de las variables indicadas en la cabecera, <b><ins>sin valores nulos</ins></b>. Así mismo, los valores deben ser cuantificados, en caso de tener valores tipo cadena, se insta al usuario a cuantificarlos. De hacer caso omiso, el programa podría mostrar resultados inesperados o terminarse abruptamente.</p>
+            </div>
+        </form>
+    </body>
+</html>

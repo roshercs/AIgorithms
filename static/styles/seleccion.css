@@ -1,0 +1,26 @@
+body{
+    background-color: #d12ac1;
+}
+
+#main-container{
+    background-color: #ffb3f5;
+    margin: 25px 200px 25px 200px;
+    padding: 25px 60px 25px 60px;
+    border-radius: 15px;
+    box-shadow:
+    inset 0 -3em 3em rgba(0,0,0,0.1),
+          0 0  0 2px rgb(255,255,255),
+          0.3em 0.3em 1em rgba(0,0,0,0.3);
+
+    color: black;
+}
+
+#titulo{
+    text-align: center;
+    align-items: center;
+    font-family: 'Lobster', cursive;
+    font-size: 36px;
+    background-color: #b61d5d;
+    border-radius: 15px;
+    margin: 15px 200px 15px 200px;
+}

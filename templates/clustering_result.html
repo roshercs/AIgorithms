@@ -1,0 +1,196 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static '/styles/clustering_result.css' %}"/>
+
+    <div id="container_rules">
+        <h1 id="Titulo">Resultados obtenidos: Clustering {{clusteringtype}} </h1>
+        <div class="valores">
+            <p>Archivo: {{filename}}</p>
+            <p>Metrica: {{metrica}}</p>
+            <p>Procesamiento de Datos: {{datosProc}}</p>
+            <p>K value: {{kvalues}}</p>
+        </div>
+
+        {% if clusteringtype == "jerarquico" %}
+            <p class="textoCont">En el algoritmo jerárquico, como se mencionó previamente, partimos de clústers de un único elemento que de forma iterativa se fucionan hasta llegar a un mismo algoritmo. En este algoritmo, nosotros podemos definir un número "a mano alzada" de clústers. Por suerte, podemos obtener un valor estimado de forma automática con el gráfico de densidad: (K={{kvalues}}). Con esto tenemos:</p>
+            <div class="graficos">
+                <img src="../media/ClusteringJerarquico.jpg" width="750px">
+            </div>
+            <p class="textoCont">
+                Cabe mencionar que no debemos dejarnos llevar por la "finta" de cambio de color. Puede confundirse que según la gráfia se tiene un mayor número de clústers que el expresado en K. Sin embargo, si prestamos atención vemos que pese a estar separados, hay clúster que pueden compartir color y por tanto son el mismo.<br>
+                Donde los elementos se agrupan en los distintos clústers como se muestra en ClusterH de la siguiente tabla: 
+            </p>
+            <div class="table-wrapper">
+                <table class="reglas-tabla">
+                    <tr>
+                        <td class="column"> </td>
+                        {% for col in data.columns %}
+                            <td class="column">
+                                {{col}}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                    {% for index, row in data.iterrows %}
+                        <tr class="row">
+                            <td class="row_name">{{index}}</td>
+                            {% for cell in row %}
+                                <td class="fila">
+                                    {{cell}}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <p class="textoCont">
+                Cada cluster tiene un número dado de elementos, tal como se muestra a continuación:
+            </p>
+            <div class="table-wrapper">
+                <table class="reglas-tabla">
+                    <tr>
+                        <td class="column">Cluster</td>
+                        {% for col in conteo.columns %}
+                            <td class="column">
+                                {{col}}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                    {% for index, row in conteo.iterrows %}
+                        <tr class="row">
+                            <td class="row_name">{{index}}</td>
+                            {% for cell in row %}
+                                <td class="fila">
+                                    {{cell}}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <p class="textoCont">
+                Así pues, estos elementos se agrupan entorno a los centroides. Estos centroides determinan los valores promedios de los miembros del clúster, y son lo sque nos permiten llegar a conclusiones. Cuando hablamos respecto al clúster nos referimos a los valores promedios dados por su centroide.
+            </p>
+            <div class="table-wrapper">
+                <table class="reglas-tabla">
+                    <tr>
+                        <td class="column">Cluster</td>
+                        {% for col in centroides.columns %}
+                            <td class="column">
+                                {{col}}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                    {% for index, row in centroides.iterrows %}
+                        <tr class="row">
+                            <td class="row_name">{{index}}</td>
+                            {% for cell in row %}
+                                <td class="fila">
+                                    {{cell}}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <p class="textoCont">
+                Podemos finalmente, revisar la distribución gráfica de los clústers. Ahora bien, existirá más de una ocasión casos donde estos clústers no se ven del todo distinguibles de forma gráfica. Podría darse que parecieran intercalarse los miembros de un clúster con otro. Aquí es cuando nos preguntamos de la agrupación realizada, que pese a realizarse correctamente, muestra resultados que podrían resultaar un tanto confusos.
+            </p>
+            <div class="graficos">
+                <img src="../media/clusters_graph.jpg" width="750px">
+            </div>
+
+        {% else %}
+            <p class="textoCont">En el algoritmo particional, como se mencionó previamente, parte de clústers seleccionados aleatoriamente. El resto de elementos se agruparan con el centroide más cercano. El centroide se recalcula tras cada agrupamiento. Así pues, se repite hasta que ya no haya más cambios en el agrupamiento. En este caso, el número de K-means lo estimamos con el elbow method previamente (K={{kvalues}})</p>
+            <p class="textoCont">
+                Donde los elementos se agrupan en los distintos clústers como se muestra en ClusterP de la siguiente tabla: 
+            </p>
+            <div class="table-wrapper">
+                <table class="reglas-tabla">
+                    <tr>
+                        <td class="column"> </td>
+                        {% for col in data.columns %}
+                            <td class="column">
+                                {{col}}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                    {% for index, row in data.iterrows %}
+                        <tr class="row">
+                            <td class="row_name">{{index}}</td>
+                            {% for cell in row %}
+                                <td class="fila">
+                                    {{cell}}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <p class="textoCont">
+                Cada cluster tiene un número dado de elementos, tal como se muestra a continuación:
+            </p>
+            <div class="table-wrapper">
+                <table class="reglas-tabla">
+                    <tr>
+                        <td class="column">Cluster</td>
+                        {% for col in conteo.columns %}
+                            <td class="column">
+                                {{col}}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                    {% for index, row in conteo.iterrows %}
+                        <tr class="row">
+                            <td class="row_name">{{index}}</td>
+                            {% for cell in row %}
+                                <td class="fila">
+                                    {{cell}}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <p class="textoCont">
+                Así pues, estos elementos se agrupan entorno a los centroides. Estos centroides determinan los valores promedios de los miembros del clúster, y son lo sque nos permiten llegar a conclusiones. Cuando hablamos respecto al clúster nos referimos a los valores promedios dados por su centroide:
+            </p>
+            <div class="table-wrapper">
+                <table class="reglas-tabla">
+                    <tr>
+                        <td class="column">Cluster</td>
+                        {% for col in centroides.columns %}
+                            <td class="column">
+                                {{col}}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                    {% for index, row in centroides.iterrows %}
+                        <tr class="row">
+                            <td class="row_name">{{index}}</td>
+                            {% for cell in row %}
+                                <td class="fila">
+                                    {{cell}}
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <p class="textoCont">
+                Podemos finalmente, revisar la distribución gráfica de los clústers. Ahora bien, existirá más de una ocasión casos donde estos clústers no se ven del todo distinguibles de forma gráfica. Podría darse que parecieran intercalarse los miembros de un clúster con otro. Aquí es cuando nos preguntamos de la agrupación realizada, que pese a realizarse correctamente, muestra resultados que podrían resultaar un tanto confusos.
+            </p>
+            <div class="graficos">
+                <img src="../media/clusters_3d.jpg" width="750px">
+            </div>
+        {% endif %}
+        
+    </div>
+    <footer id="autor">
+        <section>
+            <p>Contacto: <a href="mailto: rogerlibra01@gmail.com">Mail</a></p>
+        </section>
+        <p>Copyright 2022 by Rogelio Hernandez</p>
+    </footer>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Merriweather&display=swap" rel="stylesheet">
+        <title>Apriori</title>
+        <link rel="stylesheet" href="{% static '/styles/form__style.css' %}"/>
+        <link rel="stylesheet" href="{% static '/styles/clustering.css' %}"/>
+        <link rel="icon" type="image/png" href="{% static 'logoShort.png' %}"
+    </head>
+    <body>
+        <div class="bloque-form">
+            <div class="aux">
+
+                <form action="" class="form-register" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <h1 class="form__tittle">Paso 2: Selección de características </h1>
+                    <div class="container--flex">
+                        <fieldset id="cuadro">
+                            <legend>Por favor, indique las variables a descartar:</legend>
+                            <div>
+                                {% for x in columnas %}
+                                    <div class="checkboxes">
+                                        <label for="" class="form__label mandatory">{{x}}</label>    
+                                        <input type="checkbox" name="columns" value={{x}}/>
+                                    </div>
+                                {% endfor %}
+                                <br>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <input type="submit" class="form__submit">
+                </form>
+            </div>
+            <br>
+            <p class="textoCont">
+                Para la selección de características se muestra a continuación la matriz de correlaciones vista en teoría, junto a un "filtro de calor" para facilitar la visualización de esta:
+            </p>
+            <div class="container-aux">
+                <img class="graficos" src="../media/Correlacion.jpg" width="700px">
+            </div>
+            <p class="textoCont">
+                Cabe aclarar que entre más rojo oscuro (o azul oscuro), en el conjunto dado, se tiene mayor o menor correlación. Ahora bien, en teoría mencionamos que se buscan descartar a aquellas variables con una fuerte correlación. Si bien, podemos tener variables de rojo oscuro, no implica que tengan fuerte correlación, sino que es de las más altas en el conjunto dado. Así pues, incluso con este mapa de calor, el descartar o mantener una o más variables es dependiente del caso de estudio. Por ejemplo: en un estudio de tumores se tienen como variables el área del tumor, perímetro, radio, entre otros. En dicho caso de estudio el área, perímetro y radio tienen una alta correlación. Sin embargo, en opinión de expertos retener el perímetro y área es bastante útil. En ese caso, pese a poder descartar una de las dos las mantenemos ambas por el caso de estudio. En este caso es igual, el usuario debe conocer el tema que está tratanto o por defecto que consulte con conocedores del tema referente.
+                <br>
+            </p>
+        </div>
+
+    </body>
+</html>

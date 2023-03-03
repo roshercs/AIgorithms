@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Merriweather&display=swap" rel="stylesheet">
+        <title>Apriori</title>
+        <link rel="stylesheet" href="{% static '/styles/form__style.css' %}"/>
+        <link rel="stylesheet" href="{% static '/styles/arboles_simulate.css' %}"/>
+        <link rel="icon" type="image/png" href="{% static 'logoShort.png' %}"
+    </head>
+    <body>
+        <div class="bloque-form">
+            <div class="aux">
+
+                <form action="" class="form-register" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <h1 class="form__tittle">Paso 2: Selección de la variable de clase</h1>
+                    <div class="container--flex">
+                        <fieldset id="cuadro">
+                            <legend>Por favor, indique la variable a utilizar como variable dependiente:</legend>
+                            <div>
+                                {% for x in columnas %}
+                                    <div class="checkboxes">
+                                        <label for="" class="form__label mandatory">{{x}}</label>    
+                                        <input type="radio" name="varOP" value={{x}} required/>
+                                    </div>
+                                {% endfor %}
+                                <br>
+                            </div>
+                        </fieldset>
+                    </div>
+                    {% if tipo == "forest" %}
+                        <div class="container--flex">
+                            <label for="" class="form__label">Número de árboles (n_estimators): </label>
+                            <input type="number" class="form__input" name="nestimators" step="1" min="1" required>
+                        </div> 
+                    {% endif %}
+                    <input type="submit" class="form__submit">
+                </form>
+            </div>
+        </div>
+
+    </body>
+</html>

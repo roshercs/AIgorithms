@@ -1,0 +1,84 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static '/styles/result_style.css' %}"/>
+
+    <div id="container_rules">
+        <h1 id="Titulo">Resultados obtenidos: </h1>
+        <div class="valores">
+            <p>Archivo: {{filename}}</p>
+            <p>Metrica: {{metrica}}</p>
+            <p>Procesamiento de Datos: {{datosProc}}</p>
+            <p>Lambda (solo Minkowski): {{lambda}}</p>
+            <p>Redondeo de decimales: {{decimales}}</p>
+        </div>
+        <h2 class="subtitSec">
+            Colección de Datos
+        </h2>
+        <p class="textoCont">
+            Si se eligió un procesado de estandarización o normalización se observará que los valores de las transacciones son bastante diferente en algunos casos. Esto nos hizo tener datos con mayor relación. La colección a utilizar es la siguiente:
+        </p>
+        <div class="table-wrapper">
+            <table class="reglas-tabla">
+                <tr>
+                    <td class="column"> </td>
+                    {% for col in data.columns %}
+                        <td class="column">
+                            {{col}}
+                        </td>
+                    {% endfor %}
+                </tr>
+
+                {% for index, row in data.iterrows %}
+                    <tr class="row">
+                        <td class="row_name">{{index}}</td>
+                        {% for cell in row %}
+                            <td class="fila">
+                                {{cell}}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <h2 class="subtitSec">
+            Matriz de distancia ({{metrica}})
+        </h2>
+        <p class="textoCont">
+            Sobre esta colección de datos aplicamos las medicion de {{metrica}} y redondeamos a {{decimales}} decimales. El resultado de obtener las métricas de distancia es una matriz cuadrada de nxn, donde las filas y columas conrresponden a la transacción indicada. De esta forma, el elemento (1,2) estaría comparando la transacción 1 con la transacción 2. Esta es una matriz simétrica, donde la diagonal compara a la transacción consigo misma, de ahí que la distancia sea 0. Así pues recordemos que la distancia de un punto a otro es simétrica, por lo que es igual d(A,B) que d(B,A), de ahí que la matriz sea también simétrica. Las diferentes formas de medición muestran un valor propio de sí. en ocasiones, la euclideana es menor que la chebyshev y viceversa. Así mismo, existe una diferencia cuando los datos están estandarizados, normalizados o ninguno. Se invita al usuario a experimentar libremente para comprobarlo.
+        </p>
+        <div class="table-wrapper">
+            <table class="reglas-tabla">
+                <tr>
+                    <td class="column"> </td>
+                    {% for col in resultado.columns %}
+                        <td class="column">
+                            {{col}}
+                        </td>
+                    {% endfor %}
+                </tr>
+
+                {% for index, row in resultado.iterrows %}
+                    <tr class="row">
+                        <td class="row_name">{{index}}</td>
+                        {% for cell in row %}
+                            <td class="fila">
+                                {{cell}}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <p class="textoCont">
+            Los algoritmos de aprendizaje utilizan estas mediciones para detectar patrones, clasificar y predicir valores. El clustering mide la distancia de los elementos a los elementos clúster, y los agrupan respecto a estos según el que esté más cercano.
+        </p>
+    </div>
+    <footer id="autor">
+        <section>
+            <p>Contacto: <a href="mailto: rogerlibra01@gmail.com">Mail</a></p>
+        </section>
+        <p>Copyright 2022 by Rogelio Hernandez</p>
+    </footer>
+{% endblock %}

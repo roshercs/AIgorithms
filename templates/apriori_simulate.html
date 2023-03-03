@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Merriweather&display=swap" rel="stylesheet">
+        <title>Apriori</title>
+        <link rel="stylesheet" href="{% static '/styles/form__style.css' %}"/>
+        <link rel="icon" type="image/png" href="{% static 'logoShort.png' %}"
+    </head>
+
+    <body id="main-container">
+        <form action="" class="form-register" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h1 class="form__tittle">Ingrese los valores </h1>
+            <div class="container--flex">
+                <label for="" class="form__label">Elevación(Lift): </label>
+                <input type="number" class="form__input" name="lift" step="0.00001" min="0.00001" required>
+            </div> 
+            <div class="container--flex">
+                <label for="" class="form__label">Confianza(Confidence):</label>
+                <input type="number" class="form__input" name="confidence" step="0.00001" min="0.00001" required>
+            </div>
+            <div class="container--flex">
+                <label for="" class="form__label">Soporte(Support): </label>
+                <input type="number" class="form__input" name="support" step="0.00001" min="0.00001" required>
+            </div>
+            <input type="file" name="file_name" class="form__file" required>
+            <input type="submit" class="form__submit">
+            <div class="notas">
+                <p> <b>NOTA: </b> El archivo a seleccionar es de extención '.csv' para operar. Así mismo, para este algoritmo, se requiere el uso de una colección de datos <b><ins>SIN CABECERA</ins></b>. Cada fila cuenta como un registro de la colección, donde cada registro lista en su fila los elementos correspondientes a este. Por ejemplo, en una base de datos de películas, cada registro (fila) lista las películas observadas por una cuenta. De hacer caso omiso a esta estructura el programa operará con errores y los resultados podrían mostrarse erroneos o generar excepciones.</p>
+            </div>
+
+        </form>
+        
+        
+    </body>
+</html>

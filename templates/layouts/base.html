@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Merriweather&display=swap" rel="stylesheet">
+        <title>AIgorithms</title>
+        <link rel="stylesheet" href="{% static '/styles/sidemenu.css' %}"/>
+        <link rel="icon" type="image/png" href="{% static 'logoShort.png' %}"
+    </head>
+    <body>
+        <!------------------HEADER------------>
+        <div id="sidemenu" class="menu-collapsed">
+            <div id="header">
+                <div id="title"><span>AIgorithms</span></div>
+                <div id="menu-btn">
+                    <div class="btn-hamburguer"></div>
+                    <div class="btn-hamburguer"></div>
+                    <div class="btn-hamburguer"></div>
+                </div>
+            </div>
+            <!--------------PROFILE---------------->
+            <div id="profile">
+                <div id="photo"><a href="/" ><img src="{% static 'logoShort.png'%}" width="80px" alt="Logo" ></a></div>
+                <div id="name"><span>by Rogelio Hernandez</span></div>
+            </div>
+            <!--------------ITEMS-------------------->
+    
+            <div id="menu-items">
+                <div class="item">
+                    <a href="/apriori.html">
+                        <div class="icon"><img src="{% static 'apriori.png'%}" width="80px"></div>
+                        <div class="title"><span>Apriori</span></div>
+                    </a>
+                </div>
+                <div class="item separator"> </div>
+                <div class="item">
+                    <a href="/metricas.html">
+                        <div class="icon"><img src="{% static 'metricas.png' %}" width="80px"></div>
+                        <div class="title"><span>Métricas de Distancia</span></div>
+                    </a>
+                </div>
+    
+                <div class="item separator"> </div>
+                <div class="item">
+                    <a href="/clustering.html">
+                        <div class="icon"><img src="{% static 'clustering.png' %}" width="80px"></div>
+                        <div class="title"><span>Clustering</span></div>
+                    </a>
+                </div>
+                <div class="item separator"> </div>
+                <div class="item">
+                    <a href="/regresion_logistica.html">
+                        <div class="icon"><img src="{% static 'logistica.png' %}" width="80px"></div>
+                        <div class="title"><span>Regresion Logística</span></div>
+                    </a>
+                </div>
+                <div class="item separator"> </div>
+                <div class="item">
+                    <a href="/arboles_aleatorios.html">
+                        <div class="icon"><img src="{% static 'arboles.png' %}" width="80px"></div>
+                        <div class="title"><span>Arboles y Bosques aleatorios</span></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% block content %}
+        {% endblock %}
+        
+        <script>
+            const btn=document.querySelector('#menu-btn');
+            const menu=document.querySelector('#sidemenu');
+            btn.addEventListener('click',e=>{
+                menu.classList.toggle("menu-expanded");
+                menu.classList.toggle("menu-collapsed");
+                document.querySelector('body').classList.toggle('body-expanded');
+            });
+        </script>
+    </body>
+</html>

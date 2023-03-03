@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AIgorithms</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Merriweather&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
+    </head>
+    <body>
+        <div id="Titular">
+            <h1 id="inicio">AIgorithms: Algoritmos de aprendizaje</h1>
+        </div>
+        <p class="text">AIgorithms (AI Algorithms) es una herramienta de aprendizaje para los algoritmos de aprendizaje utilizados en la inteligencia artificial de la actualidad. La IA juega un papel cada vez más importante en la sociedad. 
+            Desde herramientas de recomendación como en Youtube al sugerirte videos en la página principal, o Netflix al recomendarte películas. La IA tiene un amplia gama de aplicaciones. En esta página, buscamos dar una introducción al maravilloso mundo de los algoritmos de aprendizaje, base fundamental de la inteligencia artificial. Para ello, ponemos a su disposición múltiples blogs orientados a cada algoritmo de aprendizaje, tanto supervisado como no supervisado. Además de dar algunas recomendaciones y sugerencias de uso de cada algoritmo. ¡Bienvenido!
+        </p>
+        <section class="container">
+            <article>
+                <h1 class="titSec">Algoritmo a priori</h1>
+
+                <img src="{% static 'apriori.png' %}" width="300px" >
+                <p class="textSec">
+                    El algoritmo a priori es el algoritmo más sencillo de los algoritmos aprendizaje. 
+                    Un algoritmo de aprendizaje no supervisado. Sus aplicaciones son variadas, siendo los sistemas de recomendaciones los más comúnes. 
+                </p>
+                <a href="{% url 'apriori' %}" >Ver mas...</a>
+            </article>
+        </section>
+        <section class="container">
+            <article>
+                <h1 class="titSec">Métricas de distancia</h1>
+                <img src="{% static 'metricas.png' %}" width="290px" >
+                <p class="textSec">Las métricas de distancia no son precisamente un algoritmo, 
+                    pero son la base de una gran variedad de algoritmos de aprendizaje (ejemplo: clustering).
+                    No está de más ver una pequeña introducció...</p>
+                <a href="metricas.html" class="vermas">Ver mas...</a>
+            </article>
+        </section>
+        <footer>
+            <section>
+                <p>Contacto: <a href="mailto: rogerlibra01@gmail.com">Mail</a></p>
+            </section>
+            <p>Copyright 2022 by Rogelio Hernandez</p>
+        </footer>
+    </body>
+</html>

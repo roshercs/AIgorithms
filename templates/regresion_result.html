@@ -1,0 +1,148 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static '/styles/regresion_result.css' %}"/>
+
+    <div id="container_rules">
+        <h1 id="Titulo">Resultados obtenidos: Regresión Logística </h1>
+        <div class="valores">
+            <p>Archivo: {{filename}}</p>
+            <p>Variable de clase: {{clase}} ({{valores1}}: 0 , {{valores2}}: 1)</p>
+            <p>Variables predictoras: {{lista}}</p>
+        </div>
+        <p>La colección original (con la variable clase cuantificada), es la siguiente:</p>
+        <div class="table-wrapper">
+            <table class="reglas-tabla">
+                <tr>
+                    <td class="column">Elemento</td>
+                    {% for col in data.columns %}
+                        <td class="column">
+                            {{col}}
+                        </td>
+                    {% endfor %}
+                </tr>
+                {% for index, row in data.iterrows %}
+                    <tr class="row">
+                        <td class="row_name">{{index}}</td>
+                        {% for cell in row %}
+                            <td class="fila">
+                                {{cell}}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <p>De esta colección, se separó como muestra de entrenamiento el total de {{Xsize}} elementos, listados a continuación (solo las variables predictoras):</p>
+        <div class="table-wrapper">
+            <table class="reglas-tabla">
+                <tr>
+                    <td class="column">Elemento</td>
+                    {% for col in entrenamiento.columns %}
+                        <td class="column">
+                            {{col}}
+                        </td>
+                    {% endfor %}
+                </tr>
+                {% for index, row in entrenamiento.iterrows %}
+                    <tr class="row">
+                        <td class="row_name">{{index}}</td>
+                        {% for cell in row %}
+                            <td class="fila">
+                                {{cell}}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <p>Así pues, ponemos a prueba el modelo con la muestra para validación:</p>
+        <div class="table-wrapper">
+            <table class="reglas-tabla">
+                <tr>
+                    <td class="column">Elemento</td>
+                    {% for col in prob.columns %}
+                        <td class="column">
+                            {{col}}
+                        </td>
+                    {% endfor %}
+                </tr>
+                {% for index, row in prob.iterrows %}
+                    <tr class="row">
+                        <td class="row_name">{{index}}</td>
+                        {% for cell in row %}
+                            <td class="fila">
+                                {{cell}}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <p> Esta tabla muestra la posibilidad de que un elemeto sea del tipo 0, o del tipo 1. Puede observarse que ambos valores son complementos entre sí, dando un total del 100%. En base a esto, clasificamos los elementos, según el valro de mayor probabilidad. Con esto, podemos evaluar el modelo:</p>
+        <p class="valores2"><b>Exactitud: {{exact}} </b></p>
+
+        <p>Más específicamente nos apegamos al análisis de la matriz de clasificación:</p>
+        <div class="table-wrapper">
+            <table class="reglas-tabla">
+                <tr>
+                    <td class="column">Real/Clasificacion</td>
+                    {% for col in MatClas.columns %}
+                        <td class="column">
+                            {{col}}
+                        </td>
+                    {% endfor %}
+                </tr>
+                {% for index, row in MatClas.iterrows %}
+                    <tr class="row">
+                        <td class="row_name">{{index}}</td>
+                        {% for cell in row %}
+                            <td class="fila">
+                                {{cell}}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <p>De esta matriz podemos obtener diferentes valores, como la precisión, la tasa de error, entre otras. Para este caso nos quedamos meramente con la exactitud. La cual nos dice que en el {{exact}} de los casos (mida en porcentaje) el modelo clasifica adecuadamente los datos. Si el porcentaje es mayor al 85%, indica que el modelo es capaz de predecir nuevos valores. Esta relación podemos evaluarla con la curva ROC:</p>
+        <div class="graficos">
+            <img src="../media/ROC.jpg" width="450px">
+        </div>
+        <p>Se sugiere al usuario repasar la teoría para comprender más datos para evaluar al modelo.<br>
+        Ahora bien, del modelo lineal (paso 2 para obtener el modelo Logístico) tenemos como intercepto y coeficientes:</p>
+        <p class="valores2">{{inter}}</p>
+        <p class="valores2">{{coef}}</p>
+        <p>Cada coeficiente se establece para su respectiva variable independiente (en el orden listado al inicio de la página).</p>
+        <p>Ahora bien, dado nuestro modelo, podemos probar con nuevos elementos:</p>
+        <div class="formularioShort">
+            <form action="" class="form-register" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="container--flex">
+                    <fieldset id="cuadro">
+                        <legend>Por favor, indique los valores a utilizar:</legend>
+                        <div>
+                            {% for x in lista %}
+                                <div>
+                                    <label for="" class="form__label mandatory">{{x}}</label>    
+                                    <input type="number" name={{x}} step="0.00001" min="0" required/>
+                                </div>
+                            {% endfor %}
+                            <br>
+                        </div>
+                    </fieldset>
+                    <p><b>NOTA:</b> La página se recargará hasta principios de la página, baje nuevemente con el cursor para visualiar el resultado</p>
+                </div>
+                <input type="submit" class="form__submit">
+            </form>
+        </div>
+
+        {% if estado == "1" %}
+            <p class="valores3"><b>Resultado: {{clas}} </b></p>
+        {% endif %}
+        <p>Este resultado sigue la clasificación dada para la variable de clase al principio de esta página. Así, si se muestra un 0 se indica que es del primer tipo, y 1 si es del segundo.</p>
+    </div>
+        
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Merriweather&display=swap" rel="stylesheet">
+        <title>Apriori</title>
+        <link rel="stylesheet" href="{% static '/styles/form__style.css' %}"/>
+        <link rel="icon" type="image/png" href="{% static 'logoShort.png' %}"
+    </head>
+    <body>
+        <form action="" class="form-register" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h1 class="form__tittle">Paso 1: Ingrese los valores </h1>
+            <div class="container--flex">
+                <label for="" class="form__label"> Porcentaje de tamaño de muestra para entrenamiento:</label>
+                <input type="number" class="form__input" name="train" step="0.01" min="0.15" max="0.8" required>
+            </div> 
+
+
+            <input type="file" name="file_name" class="form__file" required>
+            <input type="submit" class="form__submit">
+            <div class="notas">
+                <p> <b>NOTA: </b> El archivo a seleccionar es de extención '.csv' para operar. Así mismo, para este algoritmo, se requiere el uso de una colección de datos <b><ins>CON CABECERA</ins></b>. Cada fila cuenta con valores para cada una de las variables indicadas en la cabecera, <b><ins>sin valores nulos</ins></b>. Así pues la variable de clase debe ser <b><ins>binaria</ins></b> (solo puede tener dos valores posibles) y debe ser cualitativa (dada por etiqueta). Si la variable está cuantificada, el programa aún así asignará un valor particular a los valores. De hacer caso omiso al resto de advertencias, el programa podría mostrar resultados inesperados o terminarse abruptamente.</p>
+            </div>
+        </form>
+    </body>
+</html>

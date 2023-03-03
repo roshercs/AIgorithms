@@ -1,0 +1,76 @@
+body{
+    background-color: #d42121;
+}
+
+#main-container{
+    background-color: #ffb3b3;
+    margin: 25px 200px 25px 200px;
+    padding: 25px 60px 25px 60px;
+    border-radius: 15px;
+    box-shadow:
+    inset 0 -3em 3em rgba(0,0,0,0.1),
+          0 0  0 2px rgb(255,255,255),
+          0.3em 0.3em 1em rgba(0,0,0,0.3);
+
+    color: black;
+}
+#main-container .subtitSec{
+    font-size: 20px;
+    padding-left: 15px;
+}
+#titulo{
+    text-align: center;
+    align-items: center;
+    font-family: 'Lobster', cursive;
+    font-size: 36px;
+    background-color: #64cf0c;
+    border-radius: 15px;
+    margin: 15px 200px 15px 200px;
+}
+
+.Listado{
+    margin: 5px 40px 5px 90px;
+}
+.elementoLista{
+    text-align: justify;
+}
+.grafica{
+    margin: 0 250px 0 250px;
+    padding: 0 100px 0 100px;
+}
+.grafica2{
+    margin: 0 150px 0 150px;
+    padding: 0 100px 0 50px;
+}
+.el{
+    text-indent: 55px;
+}
+
+.subtitSec2{
+    font-size:16px;
+    padding: 5px 15px 5px 15px;
+}
+.botonLink {
+    text-decoration:none;
+    font-weight: 600;
+    font-size: 20px;
+    color:#ffffff;
+    padding-top:15px;
+    padding-bottom:15px;
+    padding-left:40px;
+    padding-right:40px;
+    background-color:#15DC07;
+    border-color: #16C60A;
+    border-width: 3px;
+    border-style: solid;
+    cursor:pointer;
+    border-radius: 5px;
+    
+}
+.botonLink:hover {
+    background-color:#0E8506;
+}
+#boton_Link{
+    margin: 15px 300px 15px 200px;
+    padding: 5px 200px 5px 200px;
+}

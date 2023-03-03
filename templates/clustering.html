@@ -1,0 +1,124 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static '/styles/clustering.css' %}"/>
+    <div id="main-container">
+        <div id="titulo">
+            <h1>Clustering</h1>
+        </div>
+
+
+        <p class="textoCont">
+            La IA aplicada en el análisis clústeres consiste en la segmentación y delimitación de grupos de elementos, que son unidos por características comunes que estos comparten (aprendizaje no supervisado). El objetivo es dividir una población heterogénea de elementos en grupos naturales (regiones o segmentos homogéneos), de acuerdo a sus similitudes. Para hacer <b>clustering</b> es necesario saber el <b>grado de similitud (medidas de distancia)</b> entre los elementos.
+            <br>
+        </p>
+        
+        <h2 class="subtitSec">Clustering Jerárquico</h2>
+        <p class="textoCont">
+            El algoritmo de clustering jerárquico organiza los elementos, de manera recursiva, en una estructura en forma de árbol. Este árbol representa las relaciones de similitud entre los distintos elementos.
+        </p>
+        <ul class="Listado">
+            <legend><b>Ventajas:</b></legend>
+            <li>Facilidad de manejo de los objetos.</li>
+            <li>No se asume un número particular de grupos.</li>
+        </ul>
+        <br>
+        <ul class="Listado">
+            <legend><b>Desventajas:</b></legend>
+            <li>Una vez que se toma la decisión de combinar dos grupos, no se puede regresar atrás.</li>
+            <li>Lento para grandes conjuntos de datos, Complejidad: O(n<sup>2</sup>log(n)).</li>
+        </ul>
+        <p class="textoCont">Para formar los cústeres se requieren de los siguientes pasos:</p>
+        <ol class="Listado">
+            <li class="elementoLista"><b>Utilizar un método para medir la similitud de los elementos:</b> Metricas de distancia (Ej. Euclideana, Chebyshev, Manhattan, Minkowski, etc.), utilizando la matriz de distancia.</li>
+            <li class="elementoLista"><b>Utilizar un método para agrupar a los elementos:</b> La forma en que se ddetermina a qué clúster pertenece un elemento. Dependiendo de este tenemos los distintos tipos de clustering</li>
+            <li class="elementoLista"><b>Utilizar un método para decidir la cantidad adecuada de grupos:</b>Pocos clústers resultan de poca relevancia. Demaisados genera un gasto innecesario de recursos computacionales, pues serían grupos de poca o única población</li>
+            <li class="elementoLista"><b>Interpretación de los grupos:</b> Agrupar los elementos no tiene otro fin que comprender a los elementos. Determinar las características que hacen homólogos a los elementos de un cluster, ver su diferenciación con otro y otra información que nos pueda proveer el clúster.</li>
+        </ol>
+        <h2 class="subtitSec2"> Algoritmo Ascendente Jerárquico</h2>
+        <p class="textoCont">
+            Consiste en agrupar en cada iteración aquellos 2 elementos más cercanos (clúster) -los de menor distancia de acuerdo  a la métria de distancia utilizado-. De esta manera se va construyendo una estructura en forma de árbol. El proceso concluye cuando se forma un único clúster (grupo). 
+        </p>
+        <div class="grafica">
+            <img src="{% static 'jerarquico.png' %}" width="250px">
+        </div>
+        <p class="textoCont">Su pseudocódigo sería el siguiente:</p>
+        <ol class="Listado">
+            <li class="elementoLista"><b>Calcular</b> la matriz de distancias/similitud (con la métrica de distancia deseado).</li>
+            <li class="elementoLista"><b>Inicialización:</b> Cada elemento es un clúster.</li>
+            <li class="elementoLista"><b>Repeptir:</b></li>
+            <li class="elementoLista el">Combinar los dos clústeres más cercanos.</li>
+            <li class="elementoLista el">Actualizar la matriz de distancias/similitud.</li>
+            <li class="elementoLista"><b>Hasta</b> que sólo quede un clúster.</li>
+        </ol>
+        <p class="textoCont">
+            Cuando se trabaja con clustering, dado que son algoritmos basados en distancias, <u><b>es fundamental estandarizar los datos</b></u> para que cada una de las variables contribuyan por igual en el análisis. La razón por la que es fundamental realizar la estandarización, es que si existen diferencias entre los rangos de las variables iniciales, aquellas variables con rangos más grandes predominarán sobre las que tienen rangos pequeños (por ejemplo, una variable que oscila entre 0 y 100 dominará sobre una que oscila entre 0 y 1), lo que dará lugar a resultados sesgados.
+        </p>
+        <div class="grafica">
+            <img src="{% static 'normalizar-escalar.png' %}" width="250px">
+        </div>
+        <p class="textoCont">
+            El procedimiento de este algoritmo es sencillo. Primeramente, cada elemento es un clúster, es decir, tendremos n clústeres de un solo integrante. De acuerdo a la métrica de distancia seleccionada obtenemos la matriz de distancias. Con esta matriz, obtenemos los pares de elementos más cercanos, es decir, obtenemos grupos de dos elementos cuyos integrantes tengan la menor distancia entre sí (de acuerdo a la matriz de distancia). En la matriz de distancia, ambas filas (y columnas) de los respectivos elementos se fusionan como uno solo (ej. A y B pasan a ser AB) y la distancia de este grupo al resto de elementos es el promedio de la distancia de cada elemento por separado. Repetimos este proceso pero ahora considerando cada grupo como un clúster, y la distancia en la matriz será el promedio del cluster con el otro. De esta forma, se estaría llegando a un único clúster.
+        </p>
+        <h2 class="subtitSec2">Método para decidir la cantidad de grupos</h2>
+        <p class="textoCont">
+            Previamente se mencionó que se debía definir el número de clústers a manejar. Tener un único clúster sería un total desperdicio del algoritmo, pues si al final todos los elementos se agrupan en un mismo clúster, sería igual que desde un principio dijiesemos que se trata de un clúster, sin pasar por ningun procesado. Así pues, tener muchos grupos implica mayor complejidad de manejo y quizas las diferencias entre los clúster no sean significativas. Se puede obtener el número deseado de clústeres "cortando" el árbol al nivel adecuado.
+        </p>
+        <div class="grafica">
+            <img src="{% static 'clusterNivel.png' %}" width="350px">
+        </div>
+        <h2 class="subtitSec2">Centroide</h2>
+        <p class="textoCont">
+            Para la interpretación de los clústers utilizamos el <b>centroide</b>. El centroide es el punto que ocupa la posición media en un cluster. La ubicación del centroide se calcula de manera iterativa, es decir, cada que se fucionan dos clústers se recalcula su centroide. Cuando nos referimos a las carácterísticas de un clúster se mencionan los valores definidos en su centroide, como un promedio de sus integrantes.
+        </p>
+
+        <h2 class="subtitSec">Clustering Particional</h2>
+        <p class="textoCont"> El algoritmo particional, conocido también como de particiones, organiza los elementos dentro
+            de k clústeres (k-means). Como se mencionó previamente, la forma en cómo agrupamos los elementos en clústers distinguen a los diferentes tipos de clustering. En este caso, se utiliza la estrategia de k-means
+        </p>
+        <h2 class="subtitSec2">K-means</h2>
+        <p class="textoCont"> 
+            Es uno de los algoritmos utilizados en la industria para crear k clústeres a partir de un conjunto
+            de elementos (objetos), de modo que los miembros de un grupo sean similares. El algoritmo k-means resuelve problemas de optimización, dado que la función es minimizar (optimizar) la suma de las distancias de cada elemento al centroide de un clúster. Para este algoritmo se retoma el concepto de <b>centroide</b> (punto que ocupa la posición media en un cluster). Sin embargo, para este tipo de clustering, al inicio, cuando se empieza a definir el cluster, es probable que el centroide no tenga relación con algunos de los elementos. Posteriormente, la ubicación del centroide se calcula de manera iterativa.
+            <br>
+            El pseudocódigo de este clustering es el siguiente:
+        </p>
+        <ol class="Listado">
+            <li class="elementoLista"><b>Calcular</b> la matriz de distancias/similitud (con la métrica de distancia deseado).</li>
+            <li class="elementoLista"><b>Inicio</b> Se establecen k centroides para la formación de k grupos. Estos centroides
+                (elementos) se eligen aleatoriamente.</li>
+            <li class="elementoLista"><b>Asignación:</b>Cada elemento es asignado al centroide más cercano. Se asigna cada elemento al clúster más cercano, aplicando alguna medida de distancia. De este modo, se generarán k clusters</li>
+            <li class="elementoLista"><b>Actualización</b>Se actualiza la posición del centroide con base en la media de los elementos asignados en el cluster.</li>
+            <li class="elementoLista">Actualizar la matriz de distancias/similitud.</li>
+            <li class="elementoLista"><b>Repetir: </b>Se repiten los pasos 2 y 3 de manera iterativa hasta que los centroides no cambien más.</li>
+        </ol>
+        <p class="textoCont">Por obvias razones, recordamos al usuario la necesidad de <b>estandarizar los datos</b> para     obtener resultados más consistentes.
+            <br>
+            Ahora bien, la idea básica de los algoritmos de partición, como K-means, es definir el número de grupos. En otras palabras, se busca definir el número significativo de k clústers (K-means) de nuestra colección
+        </p>
+        <h2 class="subtitSec2">Método para decidir la cantidad de grupos</h2>
+        <p class="textoCont">
+            El propósito es identificar el valor de k, donde la distorsión (efecto del codo) cambia de manera significativa. Para este método tenemos el algoritmo:
+        </p>
+        <ol class="Listado">
+            <li class="elementoLista">Calcular el agrupamiento para diferentes valores de k. Por ejemplo, k de 2 a 12 grupos.</li>
+            <li class="elementoLista">Para cada k, calcular la suma total de la distancia al cuadrado dentro de cada grupo (SSE, suma de la distancia al cuadrado entre cada elemento del clúster y su centroide, conocido también como WSS).</li>
+            <div class="grafica2">
+                <img src="{% static 'kmeans.png' %}" width="450px">
+            </div>
+            <li class="elementoLista">Trazar la curva de SSE de acuerdo con el número de grupos k.</li>
+            <li class="elementoLista">La ubicación de una curva (efecto del codo) en el gráfico se considera como un indicador del número adecuado de grupos. Es decir, el punto de inflexión se considera como un indicador del número adecuado de grupos.</li>
+            <div class="grafica2">
+                <img src="{% static 'elbow.png' %}" width="auto">
+            </div>
+        </ol>
+        <h2 class="subtitSec2">Consideraciones Finales</h2>
+        <p class="textoCont">
+            Aumentar la cantidad de clústeres mejorará naturalmente el ajuste (se hará una mejor explicación de la variación). Sin embargo, se puede caer en un sobre ajuste, ya que se está dividiendo en múltiples grupos. Además, en la práctica, puede que no exista un codo afilado (codo agudo) y, como método heurístico, ese "codo" no siempre puede identificarse sin ambigüedades. Por ello mismo, nos apollamos de elementos gráficos para distinguirlo, por suerte, de forma automática.
+        </p>
+        <div id="boton_Link">
+            <a href="/clustering_simulate.html"><button type="button" class="botonLink">Empezar</button></a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,60 @@
+html{
+    font-family: 'Merriweather', serif;
+}
+body{
+    margin: 0px;
+    background-color: #99CCFF;
+}
+#Titular{
+    background-color:#3333FF;
+    padding: 3px 10px 3px 10px;
+}
+
+.text{
+    text-align: justify;
+    margin: 10px;
+}
+.textSec{
+    text-align: justify;
+    margin: 10px;
+    font-size: 12px;
+}
+.container{
+    width: 300px;
+    margin: 10px;
+    display: inline-block;
+}
+
+section article{
+    transition: box-shadow 0.3s ease;
+    background-color:#FFFFFF;
+    margin:1rem 0;
+    border-radius:0.5rem;
+    cursor:pointer;
+}
+section article:hover{
+    box-shadow: 0 0.1rem 0.4rem rgba(0,0,0,0.3);
+}
+.titSec{
+    text-align:center;
+    background-color:#D0D3D4;
+}
+.vermas:hoover{
+    box-shadow:0 0.1rem 0.4rem rgba(0,0,0,0.3);    
+}
+footer{
+    background-color: #34495E;
+    padding: 1rem;
+    color: white;
+    position: absolute;
+    width: 1487px;
+}
+footer section{
+    float: right;
+}
+#inicio{
+    font-family: 'Lobster', cursive;
+    margin: 10px 350px 10px 350px;
+    color: white;
+    font-size: 12px;
+}

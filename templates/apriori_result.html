@@ -1,0 +1,55 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static '/styles/result_style.css' %}"/>
+    <div id="container_rules">
+        <h1>Resultados obtenidos: </h1>
+        <p>Archivo: {{filename}}</p>
+
+        <p>Un primer paso para el análisis de los resultados obtenidos, es comprender la distribución y el estado de los datos a operar. Por ejemplo, conocer el tema sobre el que tratan los datos permite al desarrollador filtrar entre estos o comprender la distribución de información en su muestra. Finalmente, los algoritmos están ideados para operar con grandes colecciones de datos, por lo cual, se omite su presentación aquí, se recomienda utilizar la aplicación de preferencia para revisarlos.</p>
+        
+        
+        <p>Ahora bien, podemos hacer diferentes tipos de análisis que nos ayuden a entender lo que estamos haciendo. Por ejemplo, de los datos ingresados podemos observar la presencia de cada elemento dentro de las transacciones:</p>
+        <img class="graficos" src="../media/DistribucionApriori.jpg" width="700px">
+        <p>Existen casos donde esta información nos resulta más o menos útil. ¿Qué implica que un elemento tenga mucha mayor frecuencia que otros? Que tiene mayor presencia en las transacciones, y por tanto, podría no ser tan relevante. Una analogía sería: En una ciudad donde todos sus habitantes compran a diario el producto "Aromatizante" en una tienda, si realizamos las reglas de asociación en la gran parte de reglas aparecerá el aromatizante, lo que no serviría de mucho al recomendar un nuevo producto. Sin embargo, habrán otras ocasiones donde observar el producto "popular" podría ser conveniente. Recordemos siempre que se trata de un caso de estudio, por lo que cada uno tendrá sus propias observaciones y puntos importantes.</p>
+
+        <p> Una vez analizado un poco los datos, podemos aplicar el algoritmo <b>Apriori</b>. A continuación se mostrarán los valores empleados y los resultados obtenidos de este.</p>
+
+        <br>
+        <p>Estos son los datos ingresados, en conjunto forman una composición:</p>
+        <p class="variables">Lift: {{lift}}</p>
+        <p class="variables">Support: {{support}}</p>
+        <p class="variables">Confidence: {{confidence}}</p>
+    
+        <p> Tenemos de este conjunto de datos, y dada la configuración de soporte, confianza y elevación, un total de <b>{{tamano}}</b> reglas de asociación relacionadas. Todas estas las podemos ver a continuación: </p>
+        <div class="outer-wrapper">
+            <div class="table-wrapper">
+                <table class="reglas-tabla">
+                    <thead>
+                        <th class="column">N°</th>
+                        <th class="column">Item Base</th>
+                        <th class="column">Consecuente</th>
+                        <th class="column">Support</th>
+                        <th class="column">Confidence</th>
+                        <th class="column">Lift</th>
+                    </thead>
+                    <tbody>
+                        {% for regla in listado %}                        
+                            <tr>
+                                <td class="fila"> {{regla.index}}</td>
+                                <td class="fila"> {{regla.item_base}}</td>
+                                <td class="fila"> {{regla.consecuente}}</td>
+                                <td class="fila"> {{regla.soporte}}</td>
+                                <td class="fila"> {{regla.confianza}}</td>
+                                <td class="fila"> {{regla.elevacion}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <p>Recordemos que el algoritmo apriori utiliza reglas de asociación para operar, por lo que buscamos decir "dado esta base, tenemos una elevación que nos indica una N mayor probabilidad que se tenga el consecuente, con una confianza y soporte dado". Para cada regla, esta idea aplica. Invitamos al usuario probar con algunas de ellas para encontrar sentido lógico a estas palabras.</p>
+    </div>
+{% endblock %}

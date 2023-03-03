@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>AIgorithms</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Merriweather&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'styles/index_style.css' %}" />
+        <link rel="icon" type="image/png" href="{% static 'logoShort.png' %}"
+    </head>
+    <body>
+        <div id="titular">
+            <img src="{% static 'logo.png' %}" width="200px" class="encabezado" id="logo">
+            <h1 class="encabezado" id="titulo">AIgorithms: Algoritmos de Aprendizajes</h1>
+        </div>
+        <div id="main-container">
+            <p class="textContent">
+                AIgorithms (AI Algorithms) es una herramienta de aprendizaje para los algoritmos de aprendizaje utilizados en la inteligencia artificial de la actualidad. La IA cobra un valor cada vez mayor en nuestra vida diaria por lo que conocer un poco al respecto podría ser de ayuda para el mundo venidero. La IA tiene un amplia gama de aplicaciones, desde sistemas de recomendaciones hasta modelos predictivos en detección de enfermedades. En esta página, buscamos dar una introducción al maravilloso mundo de los algoritmos de aprendizaje, base fundamental de la inteligencia artificial. Para ello, ponemos a su disposición múltiples blogs orientados a cada algoritmo de aprendizaje, tanto supervisado como no supervisado. Además de dar algunas recomendaciones y sugerencias de uso de cada algoritmo. ¡Bienvenido!
+            </p>
+            <div id="repertorio">
+                <div class="container">
+                    <a href="{% url 'apriori' %}" class="link">
+                        <div class="head_sec">
+                            <img src="{% static 'apriori.png' %}" width="200px" class="img_content">
+                            <h3 class="titSec">Apriori</h3>
+                        </div>
+                        <p class="contSec">
+                            El algoritmo a priori es el algoritmo más sencillo de los algoritmos aprendizaje. Un algoritmo de aprendizaje no supervisado. Sus aplicaciones son variadas, siendo los sistemas de recomendaciones los más comúnes.
+                        </p>
+                    </a>
+                </div>
+                
+                <div class="container">
+                    <a href="metricas.html" class="link">
+                        <div class="head_sec">
+                            <img src="{% static 'metricas.png' %}" width="200px" class="img_content">
+                            <h3 class="titSec">Métricas de distancia</h3>
+                        </div>
+                        <p class="contSec">
+                            Las métricas de distancia no son precisamente un algoritmo, pero son la base de una gran variedad de algoritmos de aprendizaje. Existen diferentes tipos de métricas. No está de más ver una pequeña introducción...
+                        </p>
+                    </a>
+                </div>
+                <div class="container">
+                    <a href="seleccion_caracteristicas.html" class="link">
+                        <div class="head_sec">
+                            <img src="{% static 'seleccion.png' %}" width="200px" class="img_content">
+                            <h3 class="titSec">Seleccion de caracteristicas</h3>
+                        </div>
+                        <p class="contSec">
+                            Reducir la dimensionalidad de nuestros datos es un paso importante antes de aplicar cualquier algoritmo de aprendizaje. Ahondar un poco en ello es bastante útil para utilizar los siguientes algoritmos.<br><br>
+                        </p>
+                    </a>
+                </div>
+                <br>
+                <div class="container">
+                    <a href="clustering.html" class="link">
+                        <div class="head_sec">
+                            <img src="{% static 'clustering.png' %}" width="200px" height="165px" class="img_content">
+                            <h3 class="titSec">Clustering</h3>
+                        </div>
+                        <p class="contSec">
+                            Dado un conjunto de elementos, una estrategia para su procesamiento es agrupar a estos en grupos (clusters) de características similares (de menor distancia). La forma en que determinamos estos agrupamientos puede producir resultados diferentes.
+                        </p>
+                    </a>
+                </div>
+                
+                <div class="container">
+                    <a href="regresion_logistica.html" class="link">
+                        <div class="head_sec">
+                            <img src="{% static 'logistica.png' %}" width="200px" class="img_content">
+                            <h3 class="titSec">Clasificación Logística</h3>
+                        </div>
+                        <p class="contSec">
+                            La clasificación logística permite estimar la probilidad de que un elemento pertenezca a un grupo. Muy útil para la clasificación binaria, donde la clasificación lineal carece de utilidad.
+                            <br>
+                            <br>
+                        </p>
+                    </a>
+                </div>
+                <div class="container">
+                    <a href="arboles_aleatorios.html" class="link">
+                        <div class="head_sec">
+                            <img src="{% static 'arboles.png' %}" width="200px" height="160px" class="img_content">
+                            <h3 class="titSec">Arboles y Bosques Aleatorios</h3>
+                        </div>
+                        <p class="contSec">
+                            El algoritmo de arboles de decisión es uno de los algoritmos más utilizados en el aprendizaje automático supervisado. Es una estructura jerárquica que divide los datos en función de determinadas condiciones. Un bosque es un conjunto de árboles.
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <section>
+                <p>Contacto: <a href="mailto: rogerlibra01@gmail.com">Mail</a></p>
+            </section>
+            <p>Copyright 2022 by Rogelio Hernandez</p>
+        </footer>
+    </body>
+</html>

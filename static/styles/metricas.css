@@ -1,0 +1,85 @@
+body{
+    background-color: #8428a9;
+    font-family: 'Merriweather', serif;
+    font-size: 18px;
+    padding: 0;
+    margin: 0;
+    margin-left: 50px;
+}
+
+#main-container{
+    background-color: #FAFBEB;
+    margin: 45px 135px 45px 135px;
+    padding: 15px 65px 15px 65px;
+    color: black;
+    border-radius: 15px;
+    border-color: #ffbf80;
+    box-shadow:
+    inset 0 -3em 3em rgba(0,0,0,0.1),
+          0 0  0 2px rgb(255,255,255),
+          0.3em 0.3em 1em rgba(0,0,0,0.3);
+}
+
+.titSec{
+    text-align:center;
+    background-color:#ff5900;
+    color:white;
+    border-radius: 10px;
+    font-size: 36px;
+    margin: 20px 85px 20px 85px;
+    padding: 25px 100px 25px 100px;
+}
+
+.subtitSec{
+    padding: 15px 15px;
+}
+#grafica{
+    margin: 0 300px 0 300px;
+    padding: 0 100px 0 100px;
+}
+#grafica2{
+    margin: 0 150px 0 150px;
+    padding: 0 50px 0 50px;
+}
+#grafica3{
+    margin: 0 250px 0 250px;
+    padding: 0 50px 0 50px;
+}
+.botonLink {
+    text-decoration:none;
+    font-weight: 600;
+    font-size: 20px;
+    color:#ffffff;
+    padding-top:15px;
+    padding-bottom:15px;
+    padding-left:40px;
+    padding-right:40px;
+    background-color:#15DC07;
+    border-color: #16C60A;
+    border-width: 3px;
+    border-style: solid;
+    cursor:pointer;
+    border-radius: 5px;
+}
+.botonLink:hover {
+    background-color:#0E8506;
+}
+#boton_Link{
+    margin: 15px 300px 15px 300px;
+    padding: 5px 200px 5px 200px;
+}
+.Listado{
+    margin: 5px 40px 5px 90px;
+}
+footer{
+    background-color: #34495E;
+    margin:5px 0px 5px 0px;
+    padding: 5px 15px 5px 15px;
+    color: white;
+    position: absolute;
+    width: 1487px;
+    font-size: 12px;
+}
+footer section{
+    float: right;
+}

@@ -1,0 +1,81 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static '/styles/apriori.css' %}"/>
+    <div id="main-container">
+        <h1 class="titSec">Algoritmo a priori: </h1>
+        <p class="textoCont">
+            Este es el primer algoritmo base de los algoritmos de aprendizaje. Se trata de un algoritmo de aprendizaje no supervisado (unsupervised). Un buen ejemplo de la aplicación
+            de este algoritmo son los sitemas de recomiendación. Estos sistemas se encuentran en diferentes aplicaciones como Amazon, Youtube, Netflix, entre otras; con sus típicos "videos relacionados", "Peliculas que podrían gustarte", "Artículos similares", entre otros.
+            Este algoritmo trabaja utilizando las <b>reglas de asociación</b>
+        </p>
+        <h2 class="subtitSec">Reglas de asociación</h2>
+        <p class="textoCont">Es un algoritmo de aprendizaje automático basado en reglas, que se
+            utiliza para encontrar relaciones ocultas en los datos. Se originó con el estudio de transacciones de clientes para determinar asociaciones entre los artículos comprados. También se conoce como análisis de afinidad. Consiste en identificar un conjunto de patrones secuenciales en forma de reglas de tipo (Si/Entonces): </p>
+        <p class="texto-center"> A => B </p>
+        <p class="textoCont">Tal que A es el antecedente "if" y B el consecuente "then". En esencia, buscamos patrones entre los datos. Los sistemas de recomendación nos ejemplifican mejor esto. Para N usuarios que vieron peliculas, se encontrarán patrones tal que un usuario ve peliculas de forma parecida al de otro, por tanto, si el segundo ve una nueva película, al primero podría gustarle el verla. Una regla de asociación es una proporción probabilística sobre la ocurrencia de eventos
+        presentes en el conjunto de datos.</p>
+
+        <h2 class="subtitSec">Generación de reglas</h2>
+        <p class="textoCont">Si se tiene n elementos, hay 2<sup>n</sup> posibles elementos candidatos (complejidad exponencial). Por ejemplo:</p>
+        <p class="texto-center">2<sup>10</sup> = 1024 posibles reglas (combinaciones).<br>
+            2<sup>20</sup> = 1’048,576 posibles combinaciones
+        </p>
+        <div id="grafica">
+            <img src="{% static 'AprioriGeneracion.png' %}" width="350px">
+        </div>
+        <br>
+        <p class="textoCont">Siendo así, por cada elemento de nuestr colección tendríamos una gigantesca cantidad de reglas de asociación, sin embargo, algunas de ellas podrían resultar poco relevantes. Por esto mismo, se realiza la <b>poda de árbol</b>. En esencia, se buscan eliminar aquellas reglas que no tengan un mínimo valor que definimos. Y es precisamente esta poda lo que constituye el <b>algoritmo Apriori</b>.</p>
+        <div class="grafica2">
+            <img src="{% static 'Poda.png' %}" width=auto>
+        </div>
+        <h2 class="subtitSec">Algoritmo Apriori</h2>
+        <p class="textoCont">
+            Tal como se mencionó, dado un conjunto de reglas (que podemos representar como un grafo), podemos descartar aquellas reglas que no cumplan con un criterio dado. Este proceso podemos verlo de la siguiente forma:
+        </p>
+        <ol class="ListaPasos">
+            <li>Se establece un <em>soporte</em> mínimo de ocurrencias.</li>
+            <li>Se genera una lista de <b>un ítem</b> y se seleccionan los que cumplen con el criterio de soporte mínimo.</li>
+            <li>Se utiliza la lista de un ítem para generar una nueva lista de <b>dos ítems</b> que cumplan con el criterio de soporte mínimo.</li>
+            <li>Se utiliza la lista de dos ítems para generar una lista de <b>tres ítems</b>.</li>
+            <li>Se continua hasta construir un conjunto con el total de ítems disponibles (k).</li>
+        </ol>
+        <p class="textoCont">Por ejemplo, si aplicaramos este algoritmo a un conjunto de cinco elementos (A, B, C, D y E):</p>
+        <div id="grafica3">
+            <img src="{% static 'AlgoritmoApriori2.png' %}" width=auto>
+        </div>
+        <p class="textoCont">Vemos pues que cada elemento aparece un número dado de veces. De forma simple, dicha cantidad de ocurrencias es nuestro soporte. Así, A tendría un soporte de 2, pues entre las transacciones aparece 2 veces. Con esto en mente, podemos aplicar el algoritmo:</p>
+        <div class="grafica2">
+            <img src="{% static 'AlgoritmoApriori.png' %}" width=auto>
+        </div>
+        <p class="textoCont">El primer paso es definir el soporte de ocurrencias, que para nuestro caso particular es 2. Se listan todos los elementos de modo que en el segundo paso la lista sea de solo un elemento. A cada elemento se añade pues su soporte. De nuestra primera lista, vemos que D tiene soporte de 1, lo que es menor que el soporte mínimo definido, por tanto lo descartamos. Para generar la segunda tabla, realizamos todas las combinaciones posibles (sin importar el orden, es decir, AB=BA) entre todos los elementos que sí cumplen el soporte mínimo. De esta nueva lista, descartamos aquellos que no cumplan con el soporte mínimo. En este caso, el soporte de cada elemento se obtiene contando las veces que aparecen ambos elementos por separado en la misma transición. Por ejemplo, en la transición T3 observamos que aparecen A y B, por tanto AB tiene soporte de 1. Con esto en mente, podemos seleccionar aquellos elementos cumplen para nuestra segunda lista con el soporte mínimo. Y nuevamente hacemos todas las combinaciones posibles de los elementos que si tienen el soporte mínimo. El soporte para los elementos de tres elementos es la cantidad de veces que los tres elementos aparezcan en una misma transición. Por ejemplo, en T3 encontramos A, B y C, por lo que su soporte es de 1. Y así consecutivamente aplicaríamos el algoritmo hasta que no se puedan hacer más combinaciones (pues solo tenemos un elemento)o que ningún elemento de la última lista generada cumpla con el criterio de soporte mínimo de ocurrencias. En ese caso, regresaríamos a la última lista inmediata generada. De este modo, si en nuestro ejemplo la tercera lista no hubiera tenido elemento alguno con el soporte mínimo, entonces regresaríamos a la segunda lista, la que consideraríamos como nuestro conjunto de reglas de asociación generado.</p>
+        <br>
+        <p class="textoCont">
+            Apenas se habló del soporte de una regla, sin embargo, para el algoritmo apriori podemos evaluar diferentes mediciones para determinar las reglas significativas:
+        </p>
+        <ol class="ListaPasos">
+            <li><b>Soporte(Cobertura o Support):</b>Indica cuan importante es una regla dentro del total de transacciones.</li>
+            <br>
+            <li><b>Confianza (Confidence):</b>Indica que tan fiable es una regla.</li>
+            <br>
+            <li><b>Elevación (Lift o Interés):</b>Indica el nivel de relación (aumento de posibilidad) entre el antecedente y
+                consecuente de la regla. Lift < 1 (Relación negativa), Lift = 1 (Independientes), Lift > 1 (Relación positiva). Por obvias razones, nos interesa tener una elevación positiva, pues implica mayores posibilidades de relación antecedente-consecuente.</li>
+        </ol>
+        <div class="grafica2">
+            <img src="{% static 'MedicionesApriori.png' %}" width="550px">
+        </div>
+        <p class="textoCont">
+            Donde N representa el tamaño de la población, es decir, el número de transacciones, Frecuencia(X,Y) la cantidad de veces que aparece X y Y (juntas) en las transacciones, y Frecuencia(X) y Frecuencia(Y) cuantas veces aparece la respectiva en las transacciones. Bajo estas tres mediciones se pueden aplicar el algoritmo apriori. Así pues, para operar el algoritmo apriori en esta aplicación, se especifican los valores para las tres variables que se van a utilizar.
+        </p>
+        <div id="boton_Link">
+            <a href="/apriori_simulate.html"><button type="button" class="botonLink">Empezar</button></a>
+        </div>
+    </div>
+    <footer>
+        <section>
+            <p>Contacto: <a href="mailto: rogerlibra01@gmail.com">Mail</a></p>
+        </section>
+        <p>Copyright 2022 by Rogelio Hernandez</p>
+    </footer>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static '/styles/seleccion.css' %}"/>
+    <div id="main-container">
+        <div id="titulo">
+            <h1>Seleccion de caracteristicas</h1>
+        </div>
+        <h2 class="subtitSec">Selección de características</h2>
+        <p class="textoCont">
+            Antes de inmiscuirnos en el clustering se debe hablar de la selección de características. En la distancia euclideana mencionamos que en una colección de datos las transacciones podían tener n dimenciones. Si bien es cierto que de forma intuitiva pensaríamos que a mayor cantidad de variables a comparar, mayor sería la exactitud y fiabilidad de nuestras métricas. Sin embargo, esta regla no es del todo cierta. Como en la vida real, muchas variables que almacenamos pueden tener relación con otras. Por ejemplo, de las dimensiones de una casa tendríamos altura, largo, ancho, área, perímetro, etc; bien sabemos que dada la altura, longitud y ancho podemos determinar el área y perímetro. Esta dependencia de variables resulta en una redundancia a la hora de calcular. En los algoritmos de aprendizaje ocurre algo similar. <br>
+            Cuanto mayor es el número de variables, es más complejo visualizar los datos y más complejo aún trabajar con éstos.
+        </p>
+        <h2 class="">Maldición de la dimensionalidad de datos</h2>
+    </div>
+{% endblock %}

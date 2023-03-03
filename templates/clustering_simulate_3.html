@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Merriweather&display=swap" rel="stylesheet">
+        <title>Apriori</title>
+        <link rel="stylesheet" href="{% static '/styles/form__style.css' %}"/>
+        <link rel="stylesheet" href="{% static '/styles/clustering.css' %}"/>
+        <link rel="icon" type="image/png" href="{% static 'logoShort.png' %}"
+    </head>
+    <body>
+        <div class="bloque-form">
+            <div class="aux">
+
+                <form action="" class="form-register" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <h1 class="form__tittle">Paso 3: Selección de K-Means </h1>
+                    <div class="container--flex">
+                        <label for="" class="form__label"> Número de clústers (K): </label>
+                        <input type="number" class="form__input" name="kvalue" step="1" min="2" max="12" required>
+                    </div>
+                    <input type="submit" class="form__submit">
+                </form>
+            </div>
+            <br>
+            <p class="textoCont">
+                Para la selección de un valor adecuado de K para trabajar el algoritmo se emplea el Elbow método. En la gráfica buscamos el punto de inflexión de la curva. Sin embargo, dadas las ambigüedades de este, indicamos el valor obtenido de forma automática. Es decisión del usuario emplearlo o probar con uno diferente.
+            </p>
+            <div class="container-aux">
+                <img class="graficos" src="../media/elbow.jpg" width="700px">
+            </div>
+            <p class="textoCont">
+                El valor estimado de K-Means es de:
+                <br>
+            </p>
+            <h2 id="k">{{k}}</h2>
+        </div>
+
+    </body>
+</html>

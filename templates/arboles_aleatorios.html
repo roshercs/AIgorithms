@@ -1,0 +1,190 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static '/styles/arboles.css' %}"/>
+    <div id="main-container">
+        <div id="titulo">
+            <h1>Árboles de decisión y Bosques Aleatorios</h1>
+        </div>
+        <h2 class="subtitSec">Árboles de decisión</h2>
+        <p class="textoCont">
+            Es uno de los algoritmos más utilizados en el aprendizaje automático supervisado. Permiten resolver problemas de regresión (pronóstico) y clasificación. A diferencia de otros algoritmos, los árboles de decisión admiten valores numéricos y nominales. Además, tienen buena precisión en un amplio número de aplicaciones. Los árboles de decisión trabajan bajo la estrategia divide y vencerás. El objetivo es construir una estructura jerárquica eficiente y escalable que divide los datos en función de determinadas condiciones.
+            <br>
+            La construcción de un árbol de decisión puede parecer compleja, pero en realidad hemos estado utilizando árboles de decisiones durante nuestra vida para tomar decisiones. Por ejemplo: Si una persona nos pide prestado dinero, se tiene
+            que tomar una decisión. Hay varios factores (condiciones) que ayudan a determinar la decisión (prestar o no):
+        </p>
+        <div class="grafica">
+            <img src="{% static 'arbol.png' %}" width="400px">
+        </div>
+        <p class="textoCont">
+            Como puede observarse, tenemos nodos donde evaluamos ciertos valores, y otros odnde llegamos a una decisión. Desde luego, tenemos un valor inicial que es de la mayor importancia: ¿es amigo cercano?. Prestar dinero conlleva una confianza enorme, con el riesgo de no recuperarlo. Entonces, evaluar si la persona a prestar es de confianza es lo primero que nos planteamos. Y así, conforme vamos más profundo en el árbol, tenemos evaluaciones de menor importancia pero que nos resultan convenientes para decidir. Esta estructura es precisamente un árbol de decisión.
+        </p>
+        <h2 class="subtitSec2">Estructura del árbol</h2>
+        <p class="textoCont">La estructura básica de un árbol de decisión es la siguiente:</p>
+        <ul class="Listado">
+            <li class="elementoLista"><b>Nodo principal:</b>Representa toda la población (todos los datos) que posteriormente se dividirá. En otras palabras, es donde se parte cualquier elemento de la población y a partir de aquí comenzará la división. También cuenta como un nodo de decisión.</li>
+            <li class="elementoLista"><b>Nodo de decisión:</b>Se encarga de dividir los datos, dependiendo de una decisión, por ejemplo, 'Peso', mayores de 50kg y menores o iguales a 50kg. Se toman dos caminos.</li>
+            <li class="elementoLista"><b>Nodo hoja:</b>Es donde recae la decisión final. Los elementos que lleguen a un nodo hoja, adquieren el valor asignado a dicha hoja.</li>
+            <li class="elementoLista"><b>Profundidad:</b>La profundidad indica los niveles que tiene el árbol de decisión.</li>
+        </ul>
+        <div class="grafica">
+            <img src="{% static 'decisiones.png' %}" width="350px">
+        </div>
+        <p class="textoCont">
+            Para la evaluación, se empieza en el nodo raíz y se avanza en el árbol siguiendo el nodo correspondiente que cumple la condición (decisión). Este proceso continúa hasta que se alcanza un nodo hoja, que contiene la predicción o el resultado del árbol de decisión.
+        </p>
+        <h2 class="subtitSec2">Sobreajuste(Overfitting)</h2>
+        <p class="textoCont">
+            Un problema común con los árboles de decisión es el sobreajuste. Esto es sinónimo de sobre aprendizaje, que ocurre cuando se genera un árbol de decisión que cubre todos los posibles casos sobre los datos. En otras palabras, el árbol se ha ajustado lo suficiente para que cada elemento de un colección dada tenga los resultados reales. Por ejemplo, de una colección  de 15 personas para clasificar con diabetes, el árbol está ajustado de modo tal que los 15 obtienen el resultado real. A esto se considera que el árbol aprendió demasiado sobre las personas que aparecen en los datos. Si bien podría parecer correcto y útil, el sobreajuste es todo lo contrario.
+            <br>
+            El sobreajuste es uno de los desafíos más importantes en el proceso de modelación de árboles de decisión. Si no se definen límites, el árbol tendrá un 100% de precisión en el conjunto de datos de entrenamiento. En el peor de los casos tendrá una hoja por cada observación (elemento). Esto además de tener un costo computacional hace que, para nuevos elementos, los resultados no sean confiables. Por ejemplo, de las personas con diabetes en un conjunto dado tienen un patron definido. Sin embargo, para pacientes que no comparten en su totalidad las características podría clasificarlas incorrectamente.
+            <br>
+            Hay dos formas de evitar el sobreajuste: a) Definir restricciones sobre el tamaño del árbol, y b) Podar el árbol. Las restricciones por ejemplo, evitan que el árbol tenga demasiada produnfidad pues aumenta la probabilidad de sobreajuste. Podar el árbol permite eliminar ramas que quizás no sean del todo relevantes.
+        </p>
+        <ul class="Listado">
+            <p><b>Ventajas</b></p>
+            <li class="elementoLista">Se pueden utilizar para predecir valores continuos (regresión) y valores discretos (clasificación).</li>
+            <li class="elementoLista">Se pueden utilizar para clasificar datos separables de forma no lineal.</li>
+            <li class="elementoLista">Las reglas extraídas permiten hacer predicciones.</li>
+            <li class="elementoLista">Pueden ser utilizados con un amplio número de variables y gran cantidad de datos.</li>
+            <li class="elementoLista">Pueden trabajar con datos nulos (son robustos al ruido).</li>
+            <li class="elementoLista">Las hojas no significativas se podan.</li>
+            <p><b>Desventajas</b></p>
+            <li class="elementoLista">Si el criterio de división es deficiente, entonces el árbol no podrá ser generalizado.</li>
+            <li class="elementoLista">El principal problema es el sobreajuste que se puede tener.</li>
+            <li class="elementoLista">Este sobreajuste se refleja en tener un árbol demasiado profundo.</li>
+            <li class="elementoLista">Para evitar este problema se plantean algoritmos de poda para eliminar ramas profundas y no
+                significativas.</li>
+        </ul>
+        <h2 class="subtitSec2">Parámetros del árbol de decisión</h2>
+        <ul class="Listado">
+            <li class="elementoLista"><b>max_depth:</b>Indica la máxima profundidad a la cual puede llegar el árbol. Esto ayuda a
+                combatir el overfitting, pero también puede provocar underfitting.</li>
+            <li class="elementoLista"><b>min_samples_split:</b>Indica la cantidad mínima de datos para que un nodo de decisión se
+                pueda dividir. Si la cantidad no es suficiente este nodo se convierte en un nodo hoja.</li>
+            <li class="elementoLista"><b>min_samples_leaf:</b>Indica la cantidad mínima de datos que debe tener un nodo hoja.</li>
+            <li class="elementoLista"><b>criterion:</b>Indica la función que se utilizará para dividir los datos. Puede ser (ganancia de información) gini y entropy (Clasificación). Cuando el árbol es de regresión se usan funciones, como el error cuadrado medio (MSE).</li>
+        </ul>
+        <h2 class="subtitSec2">Algoritmo general</h2>
+        <p class="textoCont">
+            <b>Entrada:</b>Conjunto de elementos (E)
+            <br>
+            <b>Salida:</b>Salida: Un árbol de decisión T
+        </p>
+        <ol class="Listado">
+            <li class="elementoLista">Se crea un nodo raíz S ::= todos los elementos (E).</li>
+            <li class="elementoLista">Si todos los elementos de S son de la misma clase, el subárbol se cierra. Solución encontrada.</li>
+            <li class="elementoLista">Sino, se elige una condición de partición para dividir E, siguiendo un criterio de partición (split criterion) E1, E2,..., En</li>
+            <li class="elementoLista">El árbol queda subdivido en subárboles (los que cumplen la condición y los que no)</li>
+            <li class="elementoLista">Se repite el paso 3 para cada uno de los subárboles.</li>
+        </ol>
+        <p class="textoCont">
+            <b>Split criterion:</b> Busca hacer una división lógica de la variable.
+            <br>
+            Estos criterios pueden ser: decisión binaria (falso o verdadero, 0 o 1); categoría (valor cualitativo); o de rangos (ej. x<30, [0,15],etc.)
+        </p>
+        <h2 class="subtitSec">Ganancia de información</h2>
+        <p class="textoCont">
+            Ahora bien, como se mencionó previamente, cada nodo de decisión se define de acuerdo a su importancia. En nuestro ejemplo la primera decisión era si se trata de un amigo cercano. Para los árboles de decisión también exxiste una jerarquía de importancia. Sin embargo, esa jerarquía la define la <b>ganancia de información</b>. Para definir la ganancia de información, primero se debe analizar la entropía. La entropía es una medida de incertidumbre o de
+            desorden en los datos. La cual se utiliza para decidir qué variable debe seleccionarse como nodo de división.
+            <br>
+        </p>
+        <div class="grafica2">
+            <img src="{% static 'entropia.png' %}" width="550px">
+        </div>
+
+        <h2 class="subtitSec2">Funcionamiento</h2>
+        <ol class="Listado">
+            <li class="elementoLista">Se calcula la entropía para todas las clases y atributos.</li>
+            <li class="elementoLista">Se selecciona el mejor atributo basado en la ganancia de información de cada variable.</li>
+            <li class="elementoLista">Se itera hasta que todos los elementos sean clasificados.</li>
+        </ol>
+        <p class="textoCont">Por ejemplo:</p>
+        <div class="grafica2">
+            <img src="{% static 'entropia1.png' %}" width="550px">
+        </div>
+        <div class="grafica2">
+            <img src="{% static 'entropia2.png' %}" width="550px">
+        </div>
+        <div class="grafica2">
+            <img src="{% static 'entropia3.png' %}" width="550px">
+        </div>
+        <div class="grafica2">
+            <img src="{% static 'entropia4.png' %}" width="550px">
+        </div>
+        <div class="grafica2">
+            <img src="{% static 'entropia5.png' %}" width="550px">
+        </div>
+        
+        <p class="textoCont">Y se itera nuevamente para obtener el siguiente nodo de decisión. Dicho esto, los árboles de decisión se pueden utilizar para la regresión y la clasificación.</p>
+        <h2 class="subtitSec2">Arboles de decisión (regresion)</h2>
+        <p class="textoCont">
+            Los árboles de decisión también se pueden aplicar a problemas de regresión (pronóstico). Al igual que en la configuración de clasificación, el método de ajuste tomará como argumentos las matrices X (variables predictoras) e Y (variable a pronosticar). En este caso Y tiene valores continuos
+            <b>Criterio de regresión:</b> Si el objetivo es un valor continuo, entonces, para el nodo (m), los criterios comunes para determinar las ubicaciones para futuras divisiones son el error cuadrático medio (MSE), y el error absoluto medio (MAE).<br>
+            La desviación de MSE establece el valor pronosticado de los nodos terminales con respecto el valor medio aprendido:
+        </p>
+        <div class="grafica">
+            <img src="{% static 'mse.png' %}" width="200px">
+        </div>
+        <p class="textoCont">
+            Mientras que el MAE establece el valor pronosticado de los nodos terminales con respecto a la   mediana:
+        </p>
+        <div class="grafica">
+            <img src="{% static 'mae.png' %}" width="280px">
+        </div>
+        <div class="grafica2">
+            <img src="{% static 'rmse.png' %}" width="550px">
+        </div>
+        <h2 class="subtitSec2">Arboles de decisión (clasificación)</h2>
+        <p class="textoCont">
+            Su criterio de clasificación utiliza el concepto de entropía y ganancia de información vistos anteriormente. Su validación es a partir de una matriz de clasificación, y con ella aplican las mediciones del modelo de regresión: exactitud, tasa de error, precisión, sensibilidad y especificidad.
+        </p>
+
+        <h2 class="subtitSec">Bosques Aleatorios</h2>
+        <p clasS="textoCont">
+            En algunas ocasiones los árboles de decisión tienen la tendencia de sobreajuste (overfit). Esto significa que tienden a aprender muy bien de los datos de entrenamiento, pero su generalización pudiera ser no tan buena. Una forma de mejorar la generalización de los árboles de decisión es combinar varios árboles. A esto se conoce como Bosque Aleatorio (Random Forest), el cual es un poderoso algoritmo de aprendizaje automático, ampliamente utilizado en
+            la actualidad.
+            <br>
+            El objetivo es construir un conjunto (ensamble) de árboles de decisión combinados. Al combinar lo que
+            en realidad está pasando es que distintos árboles ven distintas porciones de los datos. Ningún árbol ve todos los datos de entrenamiento, sino cada uno se entrena con distintas muestras para un mismo problema. Esto ocasiona que cada arbol tenga una configuración propia, lo que lo diferencia de los demás. Al combinar los resultados, los errores se compensan con otros y se tiene una predicción (pronóstico o clasificación) que generaliza mejor al problema.
+            <br>
+            Por lo que, los bosques aleatorios son una variación moderna, que agrupan varios árboles de decisión para producir un modelo generalizado con el objetivo de reducir la tendencia al sobreajuste.
+            <br>
+            Pensemos en un ejemplo práctico. Cuando queremos al salir de viaje buscamos decidir el lugar destino. Un bosque aleatorio nos permitiría evaluar distintas revistas por separado para buscar lugares. O por otro lado, preguntarle a nuestros amigos una recomendación. Cada árbol nos da un resultado, y nosotros lo tomamos y decidimos un lugar final.
+            <br>
+            La diferencia visual entre un árbol de decisión y un bosque aleatorio es el ajuste (generalización –más suave–), por ejemplo, al resolver el mismo problema de pronóstico (regresión).
+        </p>
+        <div class="grafica2">
+            <img src="{% static 'arbolvsbosque.png' %}" width="650px">
+        </div>
+        <h2 class="subtitSec2">Procedimiento</h2>
+        <p class="textoCont">Los bosques aleatorios funcionan en cuatro pasos:</p>
+        <ol clasS="Listado">
+            <li class="elementoLista">Se seleccionan muestras aleatorias a partir del conjunto de datos. Estas muestras deben ser diferentes entre sí.</li>
+            <li class="elementoLista">Se construye un árbol de decisión para cada muestra y se obtiene un resultado.</li>
+            <li class="elementoLista">Se realiza una votación (clasificación) o promedio (regresión) con base en los resultados.</li>
+            <li class="elementoLista">Se selecciona el resultado con más votos (clasificación) o promedio final (regresión).</li>
+        </ol>
+        <p class="textoCont">
+            Para problemas de clasificación, se combinan los resultados de los árboles de decisión usando diferentes estrategias. Uno de los más comunes es soft-voting (voto suave), mediante el cual se da más importancia a los resultados de mayor coincidencia (0s o 1s).
+            <br>
+            Para problemas de regresión, la forma habitual de combinar los resultados de los árboles de decisión es tomando el promedio (media aritmética).
+        </p>
+        <h2 class="subtitSec2">Hiperparámetros de bosques aleatorios</h2>
+        <ul class="Listado">
+            <li class="elementoLista"><b>n_estimators: </b>Indica el número de árboles que va a tener el bosque aleatorio. Normalmente, cuantos más árboles es mejor, pero a partir de cierto punto deja de mejorar y se vuelve más lento. El valor por defecto es 100 árboles.</li>
+            <li class="elementoLista"><b>n_jobs: </b>Es el número de núcleos que se pueden usar para entrenar los árboles. Cada árbol es independiente del resto, así que entrenar un bosque aleatorio es una tarea paralelizable. Por defecto se utiliza 1 core de la CPU. Si se usa n_jobs = -1, se indica que se quiere usar tantos cores como tenga el equipo de cómputo.</li>
+            <li class="elementoLista"><b>max_features.</b>Para garantizar que los árboles sean diferentes, éstas se entrenan con una muestra aleatoria de datos. Si se quiere que sean más diferentes, se puede hacer que distintos árboles usen distintos atributos (variables). Esto puede ser útil especialmente cuando algunas variables están relacionadas entre sí.</li>  
+        </ul>
+        <p class="textoCont">
+            Para cada árbol se tendrán los parámetros de árboles de decisión vistos anteriormente. Además de esto, los bosques aleatorios pueden utilizarse para la regresión y la clasificación siguiendo los mismos principios de los árboles de decisión.
+        </p>
+
+
+
+        <div id="boton_Link">
+            <a href="/arboles_simulate.html"><button type="button" class="botonLink">Empezar</button></a>
+        </div>
+    </div>
+{% endblock %}

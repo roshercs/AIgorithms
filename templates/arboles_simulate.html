@@ -1,0 +1,69 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Merriweather&display=swap" rel="stylesheet">
+        <title>Apriori</title>
+        <link rel="stylesheet" href="{% static '/styles/form__style.css' %}"/>
+        <link rel="icon" type="image/png" href="{% static 'logoShort.png' %}"
+    </head>
+    <body>
+        <form action="" class="form-register" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h1 class="form__tittle">Paso 1: Ingrese los valores </h1>
+            <div class="container--flex">
+                <fieldset id="cuadro">
+                    <legend>Por favor, indique el algoritmo a utilizar:</legend>
+                    <div>
+                        <input type="radio" id="opc1" name="tipo" value="tree" required/>
+                        <label for="opc1">Arbol de Decision</label><br>  
+                        <input type="radio" id="opc2" name="tipo" value="forest" required/>
+                        <label for="opc2">Bosque aleatorio</label><br>
+                        <br>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="container--flex">
+                <fieldset id="cuadro">
+                    <legend>Respecto a la variable de clase, indique tipo:</legend>
+                    <br>
+                  <div>
+                        <input type="radio" id="stand" name="clase" value="sing" required/>
+                        <label for="stand"> Simple (dos valores)</label><br>
+                        <input type="radio" id="norm" name="clase" value="mult" required/>
+                        <label for="norm"> Multiple (más de dos valores)</label><br>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="container--flex">
+                <label for="" class="form__label">Profundidad máxima: </label>
+                <input type="number" class="form__input" name="depth" step="1" min="1" required>
+            </div> 
+            <div class="container--flex">
+                <label for="" class="form__label">Elementos mínimos de división de nodo (min_samples_split):</label>
+                <input type="number" class="form__input" name="minSplit" step="1" min="1" required>
+            </div>
+            <div class="container--flex">
+                <label for="" class="form__label">Elementos mínimos por hoja (min_samples_leaf): </label>
+                <input type="number" class="form__input" name="minSamples" step="1" min="1" required>
+            </div>
+
+            <div class="container--flex">
+                <label for="" class="form__label"> Porcentaje de tamaño de muestra para entrenamiento:</label>
+                <input type="number" class="form__input" name="train" step="0.01" min="0.15" max="0.8" required>
+            </div> 
+            
+            <input type="file" name="file_name" class="form__file" required>
+            <input type="submit" class="form__submit">
+            <div class="notas">
+                <p> <b>NOTA: </b> El archivo a seleccionar es de extención '.csv' para operar. Así mismo, para este algoritmo, se requiere el uso de una colección de datos <b><ins>CON CABECERA</ins></b>. Cada fila cuenta con valores para cada una de las variables indicadas en la cabecera. De hacer caso omiso, el programa podría mostrar resultados inesperados o terminarse abruptamente.</p>
+            </div>
+        </form>
+    </body>
+</html>

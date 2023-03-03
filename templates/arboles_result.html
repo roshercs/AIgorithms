@@ -1,0 +1,167 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static '/styles/regresion_result.css' %}"/>
+
+    <div id="container_rules">
+        <h1 id="Titulo">
+            Resultados obtenidos: 
+            {% if tipo == "tree" %}
+                Árboles de decisión
+            {% else %}
+                Bosques Aleatorios
+            {% endif %}
+        </h1>
+        <div class="valores">
+            <p>Archivo: {{filename}}</p>
+            <p>Variable de clase: {{clase}} </p>
+            <p>Variables predictoras: {{lista}}</p>
+            <p>N-Estimators (en AD es 1): {{n}}</p>
+        </div>
+        <p>La colección es la siguiente:</p>
+        <div class="table-wrapper">
+            <table class="reglas-tabla">
+                <tr>
+                    <td class="column">Elemento</td>
+                    {% for col in data.columns %}
+                        <td class="column">
+                            {{col}}
+                        </td>
+                    {% endfor %}
+                </tr>
+                {% for index, row in data.iterrows %}
+                    <tr class="row">
+                        <td class="row_name">{{index}}</td>
+                        {% for cell in row %}
+                            <td class="fila">
+                                {{cell}}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <p>De esta colección, se separó como muestra de entrenamiento el total de {{Xsize}} elementos, listados a continuación (solo las variables predictoras):</p>
+        <div class="table-wrapper">
+            <table class="reglas-tabla">
+                <tr>
+                    <td class="column">Elemento</td>
+                    {% for col in entrenamiento.columns %}
+                        <td class="column">
+                            {{col}}
+                        </td>
+                    {% endfor %}
+                </tr>
+                {% for index, row in entrenamiento.iterrows %}
+                    <tr class="row">
+                        <td class="row_name">{{index}}</td>
+                        {% for cell in row %}
+                            <td class="fila">
+                                {{cell}}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% if tipo == "tree" %}
+            <p class="textoCont">
+                Habiendo entrenado nuestro arbol, su estructura es la siguiente:
+            </p>
+            <div class="graficos">
+                <img src="../media/arbolGenerated.jpg" width="450px">
+            </div>
+        {% else %}
+            <p class="textoCont">En el caso de los bosques aleatorios es complicado imprimir su estructura. Recordemos que la estructura de un bosque son n_estimaros({{n}}) árboles de decisión independientes. En este caso, no podemos imprimir un gráfico de su estructura.</p>
+        {% endif %}
+        
+        <p class="textoCont">
+            Donde la exactitud de dicho modelo es el siguiente:
+        </p>
+        <p class="valores2"><b>Exactitud: {{exact}}%</b></p>
+        <p class="textoCont">
+            Que se interpreta como el {{exact}}% de los casos serán clasificados correctamente. Si probamos nuestra muestra de validación con el modelo tenemos:
+        </p>
+        <div class="table-wrapper">
+            <table class="reglas-tabla">
+                <tr>
+                    <td class="column">Elemento</td>
+                    {% for col in validation.columns %}
+                        <td class="column">
+                            {{col}}
+                        </td>
+                    {% endfor %}
+                </tr>
+                {% for index, row in validation.iterrows %}
+                    <tr class="row">
+                        <td class="row_name">{{index}}</td>
+                        {% for cell in row %}
+                            <td class="fila">
+                                {{cell}}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <p>Además de esta variable podemos evaluar otros. Más específicamente nos apegamos al análisis de la matriz de clasificación:</p>
+        <div class="table-wrapper">
+            <table class="reglas-tabla">
+                <tr>
+                    <td class="column">Real/Clasificacion</td>
+                    {% for col in MatClas.columns %}
+                        <td class="column">
+                            {{col}}
+                        </td>
+                    {% endfor %}
+                </tr>
+                {% for index, row in MatClas.iterrows %}
+                    <tr class="row">
+                        <td class="row_name">{{index}}</td>
+                        {% for cell in row %}
+                            <td class="fila">
+                                {{cell}}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <p>De esta matriz podemos obtener diferentes valores, como la precisión, la tasa de error, entre otras. Para este caso nos quedamos meramente con la exactitud. La cual nos dice que en el {{exact}} de los casos el modelo clasifica adecuadamente los datos. Si el porcentaje es mayor al 85%, indica que el modelo es capaz de predecir nuevos valores.</p>
+        {% if tip == "sing" %}
+            <p class="textoCont">  Esta relación podemos evaluarla con la curva ROC: </p>
+            <div class="graficos">
+                <img src="../media/ROC.jpg" width="450px">
+            </div>
+        {% endif %}
+        <p>Ahora bien, dado nuestro modelo, podemos probar con nuevos elementos:</p>
+        <div class="formularioShort">
+            <form action="" class="form-register" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="container--flex">
+                    <fieldset id="cuadro">
+                        <legend>Por favor, indique los valores a utilizar:</legend>
+                        <div>
+                            {% for x in lista %}
+                                <div>
+                                    <label for="" class="form__label mandatory">{{x}}</label>    
+                                    <input type="number" name={{x}} step="0.00001" min="0" required/>
+                                </div>
+                            {% endfor %}
+                            <br>
+                        </div>
+                    </fieldset>
+                    <p><b>NOTA:</b> La página se recargará hasta principios de la página, baje nuevemente con el cursor para visualiar el resultado</p>
+                </div>
+                <input type="submit" class="form__submit">
+            </form>
+        </div>
+
+        {% if estado == "1" %}
+            <p class="valores3"><b>Resultado: {{clas}} </b></p>
+        {% endif %}
+    </div>
+        
+
+{% endblock %}
